@@ -1,0 +1,71 @@
+{% extends 'basepage.html.twig' %}
+
+{% block title %}★GuestBook★{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="font-weight-light">Messages</h1>
+            </div>
+            <div class="col-md-6">
+                <button class="btn btn-outline-primary float-right" type="button" data-toggle="collapse" data-target="#createMessage" aria-expanded="false" aria-controls="createMessage">
+                    New message
+                </button>
+            </div>
+        </div>
+        <p class="text-right">Всего сообщений: {{ messages | length}}</p>
+    </div>
+    <div class="collapse card card-body" id="createMessage">
+        <h3 class="font-weight-light">New message</h3>
+        {{ form_start(form) }}
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form_widget(form.username) }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="form-group col-md-4">
+                {{ form_widget(form.homepage) }}
+            </div>
+        </div>
+        <div class="form-group">
+                {{ form_widget(form.text) }}
+        </div>
+        <button class="btn btn-primary float-right" type="submit">SendMessage</button>
+        {{ form_end(form) }}
+    </div>
+    {% for message in messages %}
+        <div class="card message-block">
+            <div class="card-body">
+                <div class="message-username">
+                    {{ message.username }}
+                    <span>{{ message.email }}</span>
+                </div>
+                <div class="message-content">{{ message.text }}</div>
+                <div class="justify-content-between">
+                    {{ message.createdAt|date("F jS \\a\\t g:ia") }}
+                    <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
+                        Add comment
+                    </button>
+                </div>
+                <br>
+                <div class="collapse" id="createComment{{ message.id }}">
+                        {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
+                </div>
+                <hr>
+                {% for comment in message.comments %}
+                    <div class="comment-block">
+                        <div class="comment-username">{{ comment.username }}</div>
+                        <div class="comment-text">{{ comment.text }}</div>
+                        <span class="float-right">{{ comment.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                    </div>
+                {% endfor %}
+                {#<div class="text-white bg-white"><a href="{{ path('single_message', {'message': message.id }) }}">Watch</a></div>#}
+            </div>
+        </div>
+
+    {% endfor %}
+{% endblock %}
+

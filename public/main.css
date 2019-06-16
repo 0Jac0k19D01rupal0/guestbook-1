@@ -1,0 +1,46 @@
+body {
+    background: url('img/bg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.message-block {
+    margin: 20px 0;
+}
+
+.message-username {
+    font-size: x-large;
+    font-weight: lighter;
+}
+
+.message-username span {
+    font-size: small;
+    font-weight: lighter;
+    color: #999999;
+}
+
+.message-content {
+    margin: 20px 0;
+}
+
+.comment-block {
+    margin: 10px 20px;
+}
+
+
+.message-username {
+    font-size: large;
+    font-weight: lighter;
+}
+
+.comment-text {
+    border-bottom: 1px solid lightgray;
+}
+
+.comment-block span {
+    font-size: small;
+    font-weight: lighter;
+    color: #999999;
+}
