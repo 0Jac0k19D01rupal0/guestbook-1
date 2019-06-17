@@ -53,11 +53,14 @@ class Message
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $user_ip;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-        $this->Comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +167,18 @@ class Message
                 $comment->setMessage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserIp(): ?string
+    {
+        return $this->user_ip;
+    }
+
+    public function setUserIp(?string $user_ip): self
+    {
+        $this->user_ip = $user_ip;
 
         return $this;
     }

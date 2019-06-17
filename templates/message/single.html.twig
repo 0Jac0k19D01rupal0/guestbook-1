@@ -1,0 +1,44 @@
+{% extends 'basepage.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 single-message">
+                <h1 class="font-weight-light">{{ message.username }}</h1>
+                <span>{{ message.email }}</span><br>
+            </div>
+            <div class="col-md-6 text-right d-flex align-items-center justify-content-end">
+                <a class="btn btn-outline-primary" href="https://{{ message.homepage }}"><i class="fas fa-link"></i> {{ link_title }}</a>
+            </div>
+        </div>
+    </div>
+    <div class="card message-block">
+        <div class="card-body">
+            <div class="message-content">{{ message.text }}</div>
+            <div class="justify-content-between message-bar">
+                <span><i class="far fa-clock"> </i> {{ message.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
+                    Add comment | {{ message.comments | length}}
+                </button>
+            </div>
+            <div class="collapse" id="createComment{{ message.id }}">
+                {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
+            </div>
+            {% if message.comments | length != 0 %}
+                <hr>
+                <div class="comments">
+                    {% for comment in message.comments %}
+                        <div class="comment-block">
+                            <div class="comment-username"><i class="far fa-user"></i> {{ comment.username }}</div>
+                            <div class="comment-text">{{ comment.text }}</div>
+                            <span class="float-right">{{ comment.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {#<div class="text-white bg-white"><a href="{{ path('single_message', {'message': message.id }) }}">Watch</a></div>#}
+        </div>
+    </div>
+{% endblock %}
