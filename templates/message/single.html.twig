@@ -16,7 +16,16 @@
     </div>
     <div class="card message-block">
         <div class="card-body">
-            <div class="message-content">{{ message.text }}</div>
+            <div class="row">
+                {% if message.picture != null and img_support == true %}
+                    <div class="col-md-3">
+                        <img src="{{ picture_dir }}/{{ message.picture }}" class="img-fluid rounded" alt="Image">
+                    </div>
+                {% endif %}
+                <div class="col-md">
+                    <div class="message-content">{{ message.text }}</div>
+                </div>
+            </div>
             <div class="justify-content-between message-bar">
                 <span><i class="far fa-clock"> </i> {{ message.createdAt|date("F jS \\a\\t g:ia") }}</span>
                 <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">

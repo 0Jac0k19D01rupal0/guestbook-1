@@ -16,7 +16,7 @@ body {
 }
 
 .message-bar {
-    padding-bottom: 20px;
+    padding: 20px 0;
 }
 
 .message-bar a{
@@ -48,6 +48,17 @@ body {
 .single-message span {
     font-weight: lighter;
     color: #999999;
+}
+
+.form-load-files label {
+    font-size: small;
+    font-weight: lighter;
+    color: #999999;
+    margin-bottom: 0;
+}
+
+.form-message-btn {
+    margin-top: 30px;
 }
 
 /* AUTH FORM */
@@ -172,3 +183,14 @@ body {
         color: #777;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .form-message-btn {
+        width: 100%;
+    }
+
+    .message-picture {
+        padding-bottom: 20px;
+    }
+}
+

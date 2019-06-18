@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -57,6 +58,16 @@ class Message
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $user_ip;
+
+    /**
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/jpeg", "image/gif", "image/png", "image/tiff", "image/webp",},
+     *     mimeTypesMessage = "Please upload image in format .png, .jpeg, .tiff, .webp"
+     * )
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $picture;
 
     public function __construct()
     {
@@ -179,6 +190,18 @@ class Message
     public function setUserIp(?string $user_ip): self
     {
         $this->user_ip = $user_ip;
+
+        return $this;
+    }
+
+    public function getPicture(): ?string
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?string $picture): self
+    {
+        $this->picture = $picture;
 
         return $this;
     }

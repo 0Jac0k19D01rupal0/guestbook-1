@@ -8,11 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class UserController extends AbstractController
 {
     /**
-     * @Route("/signup", name="user_signup")
+     * @Route("/signup", name="signup")
      */
     public function signup(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
@@ -38,12 +39,16 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/signin", name="user_signin")
+     * @Route("/signin", name="signin")
      */
-    public function signin()
+    public function signin(Request $request, AuthenticationUtils $authUtils)
     {
+        $error = $authUtils->getLastAuthenticationError();
+        $lastUsername = $authUtils->getLastUsername();
+
         return $this->render('user/signin.html.twig', [
-            'controller_name' => 'UserController',
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ]);
     }
 }

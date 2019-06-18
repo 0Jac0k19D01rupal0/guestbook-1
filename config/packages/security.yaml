@@ -7,7 +7,11 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            anonymous: true
+            #anonymous: true
+            anonymous: ~
+            form_login:
+                login_path: signin
+                check_path: signin
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -21,4 +25,5 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
     encoders:
-        App\Entity\User: auto
+        App\Entity\User: native
+

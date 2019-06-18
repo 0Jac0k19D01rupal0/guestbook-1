@@ -6,6 +6,8 @@ use App\Entity\Message;
 use App\Form\MessageType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -29,6 +31,18 @@ class MessageController extends AbstractController
             $message_entity = $form->getData();
             $message_entity->setCreatedAt(new \DateTime('now'));
             $message_entity->setUserIp($request->getClientIp());
+
+            $file = $form->get('picture')->getData();
+            $filename = md5(uniqid()).'.'.$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('picture_dir'), $filename
+                );
+            } catch (FileException $e) {
+
+            }
+            $message_entity->setPicture($filename);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($message_entity);
             $em->flush();
@@ -38,7 +52,9 @@ class MessageController extends AbstractController
 
         return $this->render('message/index.html.twig', [
             'form' => $form->createView(),
-            'messages' => $messages
+            'messages' => $messages,
+            'picture_dir' => $this->getParameter('picture_path'),
+            'img_support' => true,
         ]);
     }
 
@@ -60,7 +76,9 @@ class MessageController extends AbstractController
         return $this->render('message/single.html.twig', [
             'title' => $title,
             'link_title' => $linktitle,
-            'message' => $message
+            'message' => $message,
+            'picture_dir' => $this->getParameter('picture_path'),
+            'img_support' => true,
         ]);
     }
 //    /**
