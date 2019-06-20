@@ -17,14 +17,14 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', TextType::class, [
-                'label' => 'Username',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Username',
-                    'id' => 'inputUsername'
-                ]
-            ])
+//            ->add('username', TextType::class, [
+//                'label' => 'Username',
+//                'attr' => [
+//                    'class' => 'form-control',
+//                    'placeholder' => 'Username',
+//                    'id' => 'inputUsername'
+//                ]
+//            ])
             ->add('email', EmailType::class, [
                 'label' => 'E-mail',
                 'attr' => [
@@ -40,15 +40,6 @@ class RegistrationType extends AbstractType
                     'placeholder' => 'Password',
                     'id' => 'inputPassword'
                 ]
-            ])
-            ->add('homepage', TextType::class, [
-                'label' => 'Your homepage (Not required)',
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Your homepage (Not required)',
-                    'id' => 'inputHomepage'
-                ],
-                'required' => false
             ])
             ->add('termsAccepted', CheckboxType::class, array(
                 'mapped' => false,
