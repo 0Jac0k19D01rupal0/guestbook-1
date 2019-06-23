@@ -1,13 +1,19 @@
 body {
-    background: url('img/bg.jpg') no-repeat center center fixed;
+    /*background: url('img/bg.jpg') no-repeat center center fixed;*/
+    background: linear-gradient(to top left, #7a30fc, #1ec5ee) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
 }
 
-.message-block, .message-content {
-    margin: 20px 0;
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .message-username {
@@ -15,13 +21,12 @@ body {
     font-weight: lighter;
 }
 
-.message-bar {
-    padding: 20px 0;
-}
-
-.message-bar a{
-    margin-left: 10px;
-}
+.message-block, .message-content { margin: 20px 0; }
+.message-bar { padding: 20px 0; }
+.message-bar a{ margin-left: 10px; }
+.message-count { padding-top: 60px;}
+.message-sort { width: 165px; }
+.message-errors ul { margin-bottom: 0; }
 
 .message-username span {
     font-size: small;
@@ -191,6 +196,15 @@ body {
 
     .message-picture {
         padding-bottom: 20px;
+    }
+
+    .message-count{
+        padding-top: 0;
+    }
+
+    .message-sort {
+        width: 100%;
+        margin-bottom: 20px;
     }
 }
 

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -43,6 +44,9 @@ class SecurityController extends AbstractController
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
+            $user = $form->getData();
+            $user->setCreatedAt(new \DateTime('now'));
+
             // 4) сохраните Пользователя!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
@@ -51,13 +55,21 @@ class SecurityController extends AbstractController
             // ... сделайте любую другую работу - вроде отправки письма и др
             // может, установите "флеш" сообщение об успешном выполнении для пользователя
 
-            return $this->redirectToRoute('message');
+            return $this->redirectToRoute('user_login');
         }
 
         return $this->render(
             'security/register.html.twig',
             array('form' => $form->createView())
         );
+    }
+
+    /**
+     * @Route("/logout", name="user_logout")
+     */
+    public function logout()
+    {
+        return $this->redirectToRoute('message');
     }
 
     /**

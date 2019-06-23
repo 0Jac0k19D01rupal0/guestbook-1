@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity
+ *@ORM\Entity(repositoryClass="App\Repository\MessageRepository")
  */
 class Message
 {
@@ -35,6 +35,10 @@ class Message
     private $homepage;
 
     /**
+     * @Assert\Length(
+     *      min = 30,
+     *      minMessage = "Too few characters. Minimum: {{ limit }}",
+     * )
      * @ORM\Column(type="text")
      */
     private $text;

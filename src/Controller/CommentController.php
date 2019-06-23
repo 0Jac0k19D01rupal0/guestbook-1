@@ -5,16 +5,19 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Message;
 use App\Form\CommentType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class CommentController extends AbstractController
 {
     /**
      * @Route("/comment/create/{message}", name="comment_create_form")
+     * @IsGranted("ROLE_USER")
      */
-    public function create(Request $request, Message $message)
+    public function create(Request $request, Message $message, UserInterface $user = null)
     {
         $comment = new Comment();
 
@@ -29,7 +32,7 @@ class CommentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
-            $comment->setUsername('Oscarr');
+            $comment->setUsername($user->getUsername());
             $comment->setCreatedAt(new \DateTime('now'));
             $comment->setMessage($message);
 

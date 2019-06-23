@@ -32,14 +32,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('user_register') }}">Sign In</a>
-                    </li>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ app.user.username }}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ path('user_profile') }}">Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-danger" href="{{ path('user_logout') }}">Logout</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('user_login') }}">Sign In</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     {% block body %}{% endblock %}
+    <div id="particles-js"></div>
+    <script src="assets/js/particles.min.js"></script>
+    <script src="assets/js/app.js"></script>
     {% block javascripts %}{% endblock %}
 </body>
 </html>

@@ -61,7 +61,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
-            throw new InvalidCsrfTokenException();
+            //throw new InvalidCsrfTokenException();
+            throw new \Exception('Incorrect password');
         }
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
@@ -85,8 +86,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
-        //return new RedirectResponse($this->urlGenerator->generate('message'));
+        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('message'));
     }
 
     protected function getLoginUrl()

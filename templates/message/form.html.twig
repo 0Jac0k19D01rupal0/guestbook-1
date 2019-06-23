@@ -1,13 +1,4 @@
-{% extends 'basepage.html.twig' %}
-
-{% block title %}★GuestBook★ New message{% endblock %}
-
-{% block content %}
-    <h3 class="font-weight-light">New message</h3>
-    {{ form_start(form) }}
-    <div class="alert alert-danger message-errors" role="alert">
-        {{ form_errors(form.picture) }}
-    </div>
+{{ form_start(form) }}
     <div class="form-row">
         <div class="form-group col-md-4">
             {{ form_widget(form.username) }}
@@ -37,5 +28,4 @@
             <button class="btn btn-primary float-right form-message-btn" type="submit">SendMessage</button>
         </div>
     </div>
-    {{ form_end(form) }}
-{% endblock %}
+{{ form_end(form) }}

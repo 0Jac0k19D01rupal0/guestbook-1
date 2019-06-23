@@ -22,19 +22,16 @@ class MessageRepository extends ServiceEntityRepository
     // /**
     //  * @return Message[] Returns an array of Message objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findAllOrderedByCol($col, $sort_Type)
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('m.'.$col, $sort_Type)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Message
@@ -47,4 +44,12 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findAllOrderedBy($col = 'username', $sort_type = 'ASC')
+    {
+        return $this->getEntityManager()
+            ->createQuery(
+                'SELECT p FROM App:Message p ORDER BY p.'.$col.' '.$sort_type
+            )
+            ->getResult();
+    }
 }

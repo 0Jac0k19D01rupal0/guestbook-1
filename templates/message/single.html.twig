@@ -10,7 +10,9 @@
                 <span>{{ message.email }}</span><br>
             </div>
             <div class="col-md-6 text-right d-flex align-items-center justify-content-end">
+                {% if message.homepage %}
                 <a class="btn btn-outline-primary" href="https://{{ message.homepage }}"><i class="fas fa-link"></i> {{ link_title }}</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -28,13 +30,17 @@
             </div>
             <div class="justify-content-between message-bar">
                 <span><i class="far fa-clock"> </i> {{ message.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
                     Add comment | {{ message.comments | length}}
                 </button>
+                {% endif %}
             </div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
             <div class="collapse" id="createComment{{ message.id }}">
                 {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
             </div>
+            {% endif %}
             {% if message.comments | length != 0 %}
                 <hr>
                 <div class="comments">

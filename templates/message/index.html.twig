@@ -3,22 +3,39 @@
 {% block title %}★GuestBook★{% endblock %}
 
 {% block content %}
-    <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md">
                 <h1 class="font-weight-light">Messages</h1>
+                {{ form_start(sort_form) }}
+                {{ form_widget(sort_form.sort) }}
+                {{ form_end(sort_form) }}
             </div>
-            <div class="col-md-6">
+            <div class="col-md">
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <button class="btn btn-outline-primary float-right" type="button" data-toggle="collapse" data-target="#createMessage" aria-expanded="false" aria-controls="createMessage">
                     New message <i class="fas fa-pencil-alt"></i>
                 </button>
+                {% endif %}
+                <p class="text-right message-count">Всего сообщений: {{ messages | length}}</p>
             </div>
         </div>
-        <p class="text-right">Всего сообщений: {{ messages | length}}</p>
-    </div>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <div class="collapse card card-body" id="createMessage">
         <h3 class="font-weight-light">New message</h3>
         {{ form_start(form) }}
+        {% if form_errors(form.username)
+            or form_errors(form.email)
+            or form_errors(form.text)
+            or form_errors(form.picture)
+        %}
+            <div class="alert alert-danger message-errors" role="alert">
+                {{ form_errors(form.username) }}
+                {{ form_errors(form.email) }}
+                {{ form_errors(form.homepage) }}
+                {{ form_errors(form.text) }}
+                {{ form_errors(form.picture) }}
+            </div>
+        {% endif %}
         <div class="form-row">
             <div class="form-group col-md-4">
                 {{ form_widget(form.username) }}
@@ -37,7 +54,7 @@
             </div>
         </div>
         <div class="form-group">
-                {{ form_widget(form.text) }}
+            {{ form_widget(form.text) }}
         </div>
         <div class="form-row">
             <div class="form-group col-md-6 form-load-files">
@@ -50,6 +67,7 @@
         </div>
         {{ form_end(form) }}
     </div>
+    {% endif %}
 
     {% for message in messages %}
         <div class="card message-block">
@@ -73,14 +91,18 @@
                     <a class="btn btn-outline-secondary float-right btn-sm" href="{{ path('single_message', {'message': message.id}) }}">
                         Read <i class="fas fa-angle-double-right"></i>
                     </a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                     <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
                         <i class="far fa-comment"></i> {{ message.comments | length}}
                     </button>
+                    {% endif %}
                 </div>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <div class="collapse" id="createComment{{ message.id }}">
                     <br>
                     {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
                 </div>
+                {% endif %}
 
                 {% if message.comments | length != 0 %}
                     <hr>

@@ -9,13 +9,23 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Sign Up</h5>
+                        <h5 class="card-title text-center">Register</h5>
+                        {% if form_errors(form.username)
+                            or form_errors(form.email)
+                            or form_errors(form.password)
+                        %}
+                        <div class="alert alert-danger message-errors" role="alert">
+                            {{ form_errors(form.username) }}
+                            {{ form_errors(form.email) }}
+                            {{ form_errors(form.password) }}
+                        </div>
+                        {% endif %}
                         <div class="form-signin">
                             {{ form_start(form) }}
-                            {#<div class="form-label-group">#}
-                                {#{{ form_widget(form.username) }}#}
-                                {#<label for="inputUsername">{{ form_label(form.username) }}</label>#}
-                            {#</div>#}
+                            <div class="form-label-group">
+                                {{ form_widget(form.username) }}
+                                <label for="inputUsername">{{ form_label(form.username) }}</label>
+                            </div>
 
                             <div class="form-label-group">
                                 {{ form_widget(form.email) }}
@@ -31,10 +41,10 @@
                                 {{ form_widget(form.termsAccepted) }}
                                 <label class="custom-control-label" for="Check1">{{ form_label(form.termsAccepted) }}</label>
                             </div>
-                            <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"><i class="fas fa-user-plus"></i> Sign up</button>
+                            <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"><i class="fas fa-user-plus"></i> Create Account</button>
                             {{ form_end(form) }}
                             <hr class="my-4">
-                            <a class="btn btn-lg btn-primary btn-block text-uppercase" href="{{ path('user_login') }}"><i class="fas fa-sign-in-alt"></i> Sign in</a>
+                            <a class="btn btn-lg btn-primary btn-block text-uppercase" href="{{ path('user_login') }}"><i class="fas fa-sign-in-alt"></i> Login</a>
                         </div>
                     </div>
                 </div>

@@ -10,18 +10,35 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MessageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if (is_null($options['userdata'])) {
+            $builder
+                ->add('username', TextType::class, [
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'Username']
+                ])
+                ->add('email', EmailType::class, [
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'E-mail']
+                ])
+            ;
+        }
+        else {
+            $builder
+                ->add('username', TextType::class, [
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'Username', 'readonly' => 'readonly'],
+                    'data' => $options['userdata']->getUsername()
+                ])
+                ->add('email', EmailType::class, [
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'E-mail', 'readonly' => 'readonly'],
+                    'data' => $options['userdata']->getEmail()
+                ])
+            ;
+        }
         $builder
-            ->add('username', TextType::class, [
-                'attr' => ['class' => 'form-control', 'placeholder' => 'Username']
-            ])
-            ->add('email', EmailType::class, [
-                'attr' => ['class' => 'form-control', 'placeholder' => 'E-mail']
-            ])
             ->add('homepage', TextType::class, [
                 'attr' => ['class' => 'form-control', 'placeholder' => 'Your Homepage'],
                 'required' => false
@@ -31,7 +48,8 @@ class MessageType extends AbstractType
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Available download formats: .png .jpg .jpeg .tiff .webp',
-                'attr' => ['class' => 'form-control-file']
+                'attr' => ['class' => 'form-control-file'],
+                'required' => false
             ])
         ;
     }
@@ -41,5 +59,6 @@ class MessageType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Message::class,
         ]);
+        $resolver->setRequired(['userdata']);
     }
 }
