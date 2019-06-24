@@ -1,0 +1,48 @@
+menu:
+  home: 'Home'
+  about: 'About us'
+  contact: 'Contact'
+  login: 'Sing In'
+  profile: 'Profile'
+  logout: 'Logout'
+
+auth:
+  login: 'Sign in'
+  register: 'Registration'
+  username: 'Username'
+  email: 'E-mail'
+  password: 'Password'
+  remember_password: 'Remember me'
+  create_account: 'Create account'
+  signin: 'Sign In'
+  terms_accepted: 'I have read and agree to the terms'
+
+pages:
+  messages: 'Guestbook'
+  profile: 'Profile'
+  total_messages: 'Total messages'
+  your_messages: 'Your messages'
+  delete_message: 'Deleting message'
+  delete_question: 'Are you sure you want to delete the message?'
+  delete_info: 'It will be impossible to restore it'
+
+buttons:
+  read: 'Read'
+  send_message: 'Send message'
+  send_comment: 'Send comment'
+  new_message: 'New message'
+  new_comment: 'Add comment'
+  delete_message_yes: 'Yes, delete!'
+  delete_message_no: 'No, thank`s'
+
+forms:
+  sort_id_desc: 'Recently ↓'
+  sort_id_asc: 'Latest ↑'
+  sort_username_desc: 'Username A-Z ↓'
+  sort_username_asc: 'Username Z-A ↑'
+  sort_email_desc: 'Email A-Z ↓'
+  sort_email_asc: 'Email Z-A ↑'
+  message_username: 'Ваше имя'
+  message_email: 'Ваш email'
+  message_homepage: 'Ваша домашняя страница'
+  message_file_type: 'Доступные форматы загрузки: .png .jpg .jpeg .tiff .webp'

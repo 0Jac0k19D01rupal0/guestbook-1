@@ -1,0 +1,13 @@
+<div class="comments-list">
+    {% if message.comments | length != 0 %}
+        <hr>
+        {% for comment in message.comments | slice(0, 3) %}
+            <div class="comment-block">
+                <div class="comment-username"><i class="far fa-user"></i> {{ comment.username }}</div>
+                <div class="comment-text">{{ comment.text|length > 200 ? comment.text|slice(0, 200) ~ '...' : comment.text }}</div>
+                <span class="float-right">{{ comment.createdAt|date("F jS \\a\\t g:ia") }}</span>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+

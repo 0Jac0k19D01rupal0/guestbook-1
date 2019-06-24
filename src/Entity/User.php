@@ -33,6 +33,12 @@ class User implements UserInterface
     private $roles = [];
 
     /**
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 30,
+     *      minMessage = "Too short password. Minimum: {{ limit }}",
+     *      maxMessage = "Too long password. Maximum: {{ limit }}"
+     * )
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -41,21 +47,15 @@ class User implements UserInterface
     /**
      * @Assert\Length(
      *      min = 3,
-     *      max = 30,
-     *      minMessage = "Too short password. Minimum: {{ limit }}",
-     *      maxMessage = "Too long password. Maximum: {{ limit }}"
+     *      max = 25,
+     *      minMessage = "Your username must be at least {{ limit }} characters long",
+     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
      * )
      * @ORM\Column(type="string", length=255)
      */
     private $username;
 
     /**
-     * @Assert\Length(
-     *      min = 3,
-     *      max = 25,
-     *      minMessage = "Your username must be at least {{ limit }} characters long",
-     *      maxMessage = "Your first name cannot be longer than {{ limit }} characters"
-     * )
      * @ORM\Column(type="datetime")
      */
     private $created_at;

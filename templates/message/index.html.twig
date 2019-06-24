@@ -5,7 +5,7 @@
 {% block content %}
         <div class="row">
             <div class="col-md">
-                <h1 class="font-weight-light">Messages</h1>
+                <h1 class="font-weight-light">{{ 'pages.messages'| trans }}</h1>
                 {{ form_start(sort_form) }}
                 {{ form_widget(sort_form.sort) }}
                 {{ form_end(sort_form) }}
@@ -13,110 +13,76 @@
             <div class="col-md">
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <button class="btn btn-outline-primary float-right" type="button" data-toggle="collapse" data-target="#createMessage" aria-expanded="false" aria-controls="createMessage">
-                    New message <i class="fas fa-pencil-alt"></i>
+                    {{ 'buttons.new_message'| trans }} <i class="fas fa-pencil-alt"></i>
                 </button>
                 {% endif %}
-                <p class="text-right message-count">Всего сообщений: {{ messages | length}}</p>
+                <p class="text-right message-count">{{ 'pages.total_messages'| trans }}: {{ messages | length}}</p>
             </div>
         </div>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <div class="collapse card card-body" id="createMessage">
-        <h3 class="font-weight-light">New message</h3>
-        {{ form_start(form) }}
-        {% if form_errors(form.username)
-            or form_errors(form.email)
-            or form_errors(form.text)
-            or form_errors(form.picture)
-        %}
-            <div class="alert alert-danger message-errors" role="alert">
-                {{ form_errors(form.username) }}
-                {{ form_errors(form.email) }}
-                {{ form_errors(form.homepage) }}
-                {{ form_errors(form.text) }}
-                {{ form_errors(form.picture) }}
-            </div>
-        {% endif %}
-        <div class="form-row">
-            <div class="form-group col-md-4">
-                {{ form_widget(form.username) }}
-            </div>
-            <div class="form-group col-md-4">
-                {{ form_widget(form.email) }}
-            </div>
-            <div class="form-group col-md-4">
-                <label class="sr-only" for="inlineFormInputGroupUsername">Имя пользователя</label>
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">https://</div>
-                    </div>
-                    {{ form_widget(form.homepage) }}
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_widget(form.text) }}
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6 form-load-files">
-                {{ form_widget(form.picture) }}
-                <label>{{ form_label(form.picture) }}</label>
-            </div>
-            <div class="col-md-6">
-                <button class="btn btn-primary float-right form-message-btn" type="submit">SendMessage</button>
-            </div>
-        </div>
-        {{ form_end(form) }}
+        <h3 class="font-weight-light">{{ 'buttons.send_message'| trans }}</h3>
+        {% include 'message/form.html.twig' %}
     </div>
     {% endif %}
 
-    {% for message in messages %}
-        <div class="card message-block">
-            <div class="card-body">
-                <div class="row">
-                    {% if message.picture != null and img_support == true %}
-                    <div class="col-md-3 message-picture">
-                        <img src="{{ picture_dir }}/{{ message.picture }}" class="img-fluid rounded" alt="Image">
-                    </div>
-                    {% endif %}
-                    <div class="col-md">
-                        <div class="message-username">
-                            <i class="fas fa-pencil-alt"></i> {{ message.username }}
-                            <span>{{ message.email }}</span>
+    {% if messages != null %}
+        {% for message in messages %}
+            <div class="card message-block">
+                <div class="card-body">
+                    <div class="row">
+                        {% if message.picture != null and img_support == true %}
+                        <div class="col-md-3 message-picture">
+                            <img src="{{ picture_dir }}/{{ message.picture }}" class="img-fluid rounded" alt="Image">
                         </div>
-                        <div class="message-content">{{ message.text }}</div>
+                        {% endif %}
+                        <div class="col-md">
+                            <div class="message-username">
+                                <i class="fas fa-pencil-alt"></i> {{ message.username }}
+                                <span>{{ message.email }}</span>
+                            </div>
+                            <div class="message-content">
+                                {{ message.text|length > 700 ? message.text|slice(0, 700) ~ '...' : message.text  }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="justify-content-between message-bar">
-                    <i class="far fa-clock"> </i> {{ message.createdAt|date("F jS \\a\\t g:ia") }}
-                    <a class="btn btn-outline-secondary float-right btn-sm" href="{{ path('single_message', {'message': message.id}) }}">
-                        Read <i class="fas fa-angle-double-right"></i>
-                    </a>
+                    <div class="row message-bar">
+                        <div class="col">
+                            <span class="align-middle"><i class="far fa-clock"> </i> {{ message.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                        </div>
+                        <div class="col d-sx-inline-flex">
+                            <a class="btn btn-outline-secondary float-right btn-sm" href="{{ path('single_message', {'message': message.id}) }}">
+                                {{ 'buttons.read'| trans }} <i class="fas fa-angle-double-right"></i>
+                            </a>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
+                                    <i class="far fa-comment"></i> {{ message.comments | length}}
+                                </button>
+                            {% endif %}
+                        </div>
+                    </div>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
-                        <i class="far fa-comment"></i> {{ message.comments | length}}
-                    </button>
+                    <div class="collapse" id="createComment{{ message.id }}">
+                        {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
+                    </div>
                     {% endif %}
+                    <div class="d-none d-md-block">
+                        {% if message.comments | length != 0 %}
+                            <hr>
+                            {% for comment in message.comments | slice(0, 3) %}
+                                <div class="comment-block">
+                                    <div class="comment-username"><i class="far fa-user"></i> {{ comment.username }}</div>
+                                    <div class="comment-text">{{ comment.text|length > 200 ? comment.text|slice(0, 200) ~ '...' : comment.text }}</div>
+                                    <span class="float-right">{{ comment.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
                 </div>
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <div class="collapse" id="createComment{{ message.id }}">
-                    <br>
-                    {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
-                </div>
-                {% endif %}
-
-                {% if message.comments | length != 0 %}
-                    <hr>
-                    {% for comment in message.comments %}
-                        <div class="comment-block">
-                            <div class="comment-username"><i class="far fa-user"></i> {{ comment.username }}</div>
-                            <div class="comment-text">{{ comment.text }}</div>
-                            <span class="float-right">{{ comment.createdAt|date("F jS \\a\\t g:ia") }}</span>
-                        </div>
-                    {% endfor %}
-                {% endif %}
             </div>
-        </div>
-
-    {% endfor %}
+        {% endfor %}
+    {% else %}
+    <p>Not found messages</p>
+    {% endif %}
 {% endblock %}
 

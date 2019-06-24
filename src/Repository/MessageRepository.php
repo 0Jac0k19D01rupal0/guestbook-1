@@ -32,6 +32,17 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllUserMessages($col, $sort_Type, $username)
+    {
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.username = :username')
+            ->setParameter('username', $username)
+            ->orderBy('m.'.$col, $sort_Type)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Message

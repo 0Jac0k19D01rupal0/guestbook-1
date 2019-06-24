@@ -22,8 +22,8 @@ body {
 }
 
 .message-block, .message-content { margin: 20px 0; }
-.message-bar { padding: 20px 0; }
-.message-bar a{ margin-left: 10px; }
+.message-bar { padding: 10px 0; }
+.message-bar a{ margin: 0 10px; }
 .message-count { padding-top: 60px;}
 .message-sort { width: 165px; }
 .message-errors ul { margin-bottom: 0; }
@@ -48,6 +48,10 @@ body {
     font-size: small;
     font-weight: lighter;
     color: #999999;
+}
+
+.comment-form {
+    min-height: 110px
 }
 
 .single-message span {
@@ -200,11 +204,24 @@ body {
 
     .message-count{
         padding-top: 0;
+        float: left;
     }
+
+    .message-bar { padding: 0; }
 
     .message-sort {
         width: 100%;
         margin-bottom: 20px;
+    }
+
+    .message-bar a, .message-bar button {
+        margin: 5px 0 5px 5px;
+        width: 100%;
+    }
+
+    .comment-form {
+        min-height: auto;
+        margin-top: 20px;
     }
 }
 

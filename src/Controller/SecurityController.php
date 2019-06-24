@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Message;
 use App\Entity\User;
 use App\Form\RegistrationType;
+use App\Form\SortType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,10 +77,33 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
+     * @IsGranted("ROLE_USER")
      */
-    public function profile()
+    public function profile(Request $request, UserInterface $user)
     {
-        return $this->render('user/index.html.twig', [
+
+        /* SORT FORM */
+        $sort_form = $this->createForm(SortType::class);
+        $sort_form->handleRequest($request);
+        if ($sort_form->isSubmitted() && $sort_form->isValid()) {
+
+            $sort = $sort_form->getData()['sort'];
+            $sort = explode('.', $sort, 2);
+
+            $messages = $this->getDoctrine()
+                ->getRepository(Message::class)
+                ->findAllUserMessages($sort[0], $sort[1], $user->getUsername());
+        }
+        else {
+            $em = $this->getDoctrine()->getManager();
+            $messages = $em->getRepository(Message::class)->findBy(array('username' => $user->getUsername()), array('id' => 'DESC'));
+        }
+
+        return $this->render('security/profile.html.twig', [
+            'sort_form' => $sort_form->createView(),
+            'messages' => $messages,
+            'picture_dir' => $this->getParameter('picture_path'),
+            'img_support' => true,
         ]);
     }
 }

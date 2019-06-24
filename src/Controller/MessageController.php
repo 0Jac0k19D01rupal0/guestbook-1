@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class MessageController extends AbstractController
 {
@@ -70,8 +71,6 @@ class MessageController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($message_entity);
             $em->flush();
-
-            return $this->redirectToRoute('message');
         }
 
 
@@ -91,7 +90,7 @@ class MessageController extends AbstractController
     {
         /* FORM */
         $message_entity = new Message();
-        $form = $this->createForm(MessageType::class, $message_entity);
+        $form = $this->createForm(MessageType::class, $message_entity, ['userdata'=>$this->getUser()]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -124,27 +123,76 @@ class MessageController extends AbstractController
     }
 
     /**
+     * @Route("/message/update/{message}", name="update_message")
+     * IsGranted("ROLE_USER")
+     */
+    public function update(Request $request, Message $message)
+    {
+        $message = $this->getDoctrine()
+            ->getRepository(Message::class)
+            ->findOneBy(array('id' => $message));
+        if ($message->getUsername() == $this->getUser()->getUsername()) {
+
+            $form = $this->createForm(MessageType::class, $message, [
+                'action' => $this->generateUrl('update_message', [
+                    'message' => $message->getId()
+                ]),
+                'userdata' => $this->getUser()
+            ]);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $message = $form->getData();
+                $message->setUpdatedAt(new \DateTime('now'));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+
+                return $this->redirectToRoute('user_profile');
+            }
+        }
+        else {
+            return $this->redirectToRoute('message');
+        }
+
+        return $this->render('message/create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
      * @Route("/message/{message}", name="single_message")
      * @IsGranted("ROLE_USER")
      */
     public function message(Message $message)
     {
-        if (strlen($message->getHomepage()) > 35) {
-            $linktitle = substr($message->getHomepage(), 0, 35);
-            $linktitle = $linktitle.'...';
-        }
-        else {
-            $linktitle = $message->getHomepage();
-        }
         $title = substr($message->getText(), 0, 20);
         $title = '★'.$message->getUsername().'★ '.$title;
 
         return $this->render('message/single.html.twig', [
             'title' => $title,
-            'link_title' => $linktitle,
             'message' => $message,
             'picture_dir' => $this->getParameter('picture_path'),
             'img_support' => true,
         ]);
+    }
+
+    /**
+     * @Route("/message/delete/{message}", name="delete_message")
+     * IsGranted("ROLE_USER")
+     */
+    public function delete(Message $message)
+    {
+        $message = $this->getDoctrine()
+            ->getRepository(Message::class)
+            ->findOneBy(array('id' => $message));
+
+        if ($message->getUsername() == $this->getUser()->getUsername()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($message);
+            $em->flush();
+        }
+        return $this->redirectToRoute('user_profile');
     }
 }

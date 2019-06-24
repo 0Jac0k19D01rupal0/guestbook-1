@@ -16,12 +16,12 @@ class SortType extends AbstractType
             ->setMethod('GET')
             ->add('sort', ChoiceType::class, [
                 'choices' => [
-                    'Recently ↓' => 'id.DESC',
-                    'Latest ↑' => 'id.ASC',
-                    'Username A-Z ↓' => 'username.ASC',
-                    'Username Z-A ↑' => 'username.DESC',
-                    'Email A-Z ↓' => 'email.ASC',
-                    'Email Z-A ↑' => 'email.DESC'
+                    'forms.sort_id_desc' => 'id.DESC',
+                    'forms.sort_id_asc' => 'id.ASC',
+                    'forms.sort_username_desc' => 'username.ASC',
+                    'forms.sort_username_asc' => 'username.DESC',
+                    'forms.sort_email_desc' => 'email.ASC',
+                    'forms.sort_email_asc' => 'email.DESC'
                 ],
                 'attr' => ['class' => 'form-control message-sort', 'onchange' => 'if(this.value != 0) { this.form.submit(); }']
             ])

@@ -1,0 +1,97 @@
+{% extends 'basepage.html.twig' %}
+
+{% block title %}{{ app.user.username }}{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md">
+            <h1 class="font-weight-light">{{ 'pages.profile' | trans }}</h1>
+            {{ form_start(sort_form) }}
+            {{ form_widget(sort_form.sort) }}
+            {{ form_end(sort_form) }}
+        </div>
+        <div class="col-md">
+            <a class="btn btn-outline-primary float-right" href="{{ path('create_message') }}">
+                {{ 'buttons.new_message' | trans }} <i class="fas fa-pencil-alt"></i>
+            </a>
+            <p class="text-right message-count">{{ 'pages.your_messages' | trans }}: {{ messages | length}}</p>
+        </div>
+    </div>
+
+    {% if messages != null %}
+        {% for message in messages %}
+            <div class="card message-block">
+                <div class="card-body">
+                    <div class="row">
+                        {% if message.picture != null and img_support == true %}
+                            <div class="col-md-3 message-picture">
+                                <img src="{{ picture_dir }}/{{ message.picture }}" class="img-fluid rounded" alt="Image">
+                            </div>
+                        {% endif %}
+                        <div class="col-md">
+                            <div class="message-username">
+                                <i class="fas fa-pencil-alt"></i> {{ message.username }}
+                                <span>{{ message.email }}</span>
+                            </div>
+                            <div class="message-content">
+                                {{ message.text|length > 700 ? message.text|slice(0, 700) ~ '...' : message.text  }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row message-bar">
+                        <div class="col">
+                            <span class="align-middle"><i class="far fa-clock"> </i> {{ message.createdAt|date("F jS \\a\\t g:ia") }}</span>
+                        </div>
+                        <div class="col d-sx-inline-flex">
+                            <button class="btn btn-outline-danger float-right btn-sm" type="button" data-toggle="modal" data-target="#deleteMessage">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                            <a class="btn btn-outline-secondary float-right btn-sm" href="{{ path('single_message', {'message': message.id}) }}">
+                                {{ 'buttons.read' | trans }} <i class="fas fa-angle-double-right"></i>
+                            </a>
+                            <button class="btn btn-outline-success float-right btn-sm" type="button" data-toggle="collapse" data-target="#createComment{{ message.id }}" aria-expanded="false" aria-controls="createComment{{ message.id }}">
+                                <i class="far fa-comment"></i> {{ message.comments | length}}
+                            </button>
+                            <a class="btn btn-outline-primary float-right btn-sm" href="{{ path('update_message', {'message': message.id}) }}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteMessage" tabindex="-1" role="dialog" aria-labelledby="deleteMessageTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">{{ 'pages.delete_message'| trans }}</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{ 'pages.delete_question'| trans }}</p>
+                                    <i>{{ 'pages.delete_info'| trans }}</i>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal">No, thank`s</button>
+                                    <a class="btn btn-danger float-right btn-sm" href="{{ path('delete_message', {'message': message.id }) }}">
+                                        Yes, delete!
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comment form -->
+                    <div class="collapse" id="createComment{{ message.id }}">
+                        {{ render(controller('App\\Controller\\CommentController::create', {'message':message.id})) }}
+                    </div>
+                    {% include 'comment/comments-list.html.twig' %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Not found messages</p>
+    {% endif %}
+{% endblock %}

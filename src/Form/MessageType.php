@@ -29,25 +29,25 @@ class MessageType extends AbstractType
         else {
             $builder
                 ->add('username', TextType::class, [
-                    'attr' => ['class' => 'form-control', 'placeholder' => 'Username', 'readonly' => 'readonly'],
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'forms.message_username', 'readonly' => 'readonly'],
                     'data' => $options['userdata']->getUsername()
                 ])
                 ->add('email', EmailType::class, [
-                    'attr' => ['class' => 'form-control', 'placeholder' => 'E-mail', 'readonly' => 'readonly'],
+                    'attr' => ['class' => 'form-control', 'placeholder' => 'forms.message_email', 'readonly' => 'readonly'],
                     'data' => $options['userdata']->getEmail()
                 ])
             ;
         }
         $builder
             ->add('homepage', TextType::class, [
-                'attr' => ['class' => 'form-control', 'placeholder' => 'Your Homepage'],
+                'attr' => ['class' => 'form-control', 'placeholder' => 'forms.message_homepage'],
                 'required' => false
             ])
             ->add('text', TextareaType::class, [
                 'attr' => ['class' => 'form-control', 'rows' => '5']
             ])
             ->add('picture', FileType::class, [
-                'label' => 'Available download formats: .png .jpg .jpeg .tiff .webp',
+                'label' => 'forms.message_file_type',
                 'attr' => ['class' => 'form-control-file'],
                 'required' => false
             ])

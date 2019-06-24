@@ -22,15 +22,15 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('message') }}">Home
+                        <a class="nav-link" href="{{ path('message') }}">{{ 'menu.home'| trans }}
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="#">{{ 'menu.about'| trans }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">{{ 'menu.contact'| trans }}</a>
                     </li>
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="nav-item dropdown">
@@ -38,14 +38,14 @@
                                 {{ app.user.username }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ path('user_profile') }}">Profile</a>
+                                <a class="dropdown-item" href="{{ path('user_profile') }}">{{ 'menu.profile'| trans }}</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="{{ path('user_logout') }}">Logout</a>
+                                <a class="dropdown-item text-danger" href="{{ path('user_logout') }}">{{ 'menu.logout'| trans }}</a>
                             </div>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('user_login') }}">Sign In</a>
+                            <a class="nav-link" href="{{ path('user_login') }}">{{ 'menu.login'| trans }}</a>
                         </li>
                     {% endif %}
                 </ul>

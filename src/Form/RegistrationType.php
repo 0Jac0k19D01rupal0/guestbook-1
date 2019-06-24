@@ -18,7 +18,7 @@ class RegistrationType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, [
-                'label' => 'Username',
+                'label' => 'auth.username',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Username',
@@ -26,7 +26,7 @@ class RegistrationType extends AbstractType
                 ]
             ])
             ->add('email', EmailType::class, [
-                'label' => 'E-mail',
+                'label' => 'auth.email',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Email',
@@ -34,7 +34,7 @@ class RegistrationType extends AbstractType
                 ]
             ])
             ->add('password', PasswordType::class, [
-                'label' => 'Password',
+                'label' => 'auth.password',
                 'attr' => [
                     'class' => 'form-control',
                     'placeholder' => 'Password',
@@ -44,7 +44,7 @@ class RegistrationType extends AbstractType
             ->add('termsAccepted', CheckboxType::class, array(
                 'mapped' => false,
                 'constraints' => new IsTrue(),
-                'label' => 'I have read and agree to the terms',
+                'label' => 'auth.terms_accepted',
                 'attr' => [
                     'class' => 'custom-control-input',
                     'id' => 'Check1'
