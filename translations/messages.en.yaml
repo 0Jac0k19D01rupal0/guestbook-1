@@ -12,10 +12,15 @@ auth:
   username: 'Username'
   email: 'E-mail'
   password: 'Password'
+  repeat_password: 'Repeat Password'
   remember_password: 'Remember me'
   create_account: 'Create account'
   signin: 'Sign In'
   terms_accepted: 'I have read and agree to the terms'
+  pwd_recovery: 'Forgot password?'
+  recovery_title: 'Password Recovery'
+  new_password_title: 'Change Password'
+  confirm_email_title: 'Confirm Email'
 
 pages:
   messages: 'Guestbook'
@@ -25,6 +30,13 @@ pages:
   delete_message: 'Deleting message'
   delete_question: 'Are you sure you want to delete the message?'
   delete_info: 'It will be impossible to restore it'
+  recovery_error: 'Email not found'
+  recovery_success: 'You will be send a mail with instructions for recovery password'
+  new_password_success: 'Password successfully changed'
+  new_password_error: 'Access error! Password already changed'
+  register_success: 'Registration is completed! А confirmation email has been sent to your email'
+  confirm_email_success: 'Email has been successfully verified'
+  confirm_email_error: 'Email has already been verified'
 
 buttons:
   read: 'Read'
@@ -34,6 +46,8 @@ buttons:
   new_comment: 'Add comment'
   delete_message_yes: 'Yes, delete!'
   delete_message_no: 'No, thank`s'
+  sent_to_mail: 'Recovery'
+  new_password: 'Change password'
 
 forms:
   sort_id_desc: 'Recently ↓'

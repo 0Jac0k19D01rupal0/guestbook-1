@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Message;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -51,6 +52,37 @@ class MessageType extends AbstractType
                 'attr' => ['class' => 'form-control-file'],
                 'required' => false
             ])
+            ->add('text', CKEditorType::class, array(
+                'attr' => [
+                    'id' => 'record-input'
+                ],
+                'required' => false,
+                'label' => 'record.data-info',
+                'config' => [
+                    'uiColor' => '#ffffff',
+                    'toolbarGroups' => [
+                        'clipboard',
+                        ['editing', 'groups' => [ 'find', 'selection', 'spellchecker' ]],
+                        'insert',
+                        'links',
+                        'tools',
+                        ['document', 'groups' => [ 'mode', 'document', 'doctools' ]],
+                        'uploadFile',
+                        'others',
+                        'sourcearea',
+                        '/',
+                        ['basicstyles', 'groups' => [ 'basicstyles', 'cleanup' ]],
+                        'paragraph',
+                        'styles',
+                        'colors',
+                        'about',
+                    ],
+                    'removeButtons' => 'Save,NewPage,Preview,Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Superscript,Scayt,Flash,Image,About',
+                    'removeDialogTabs' => 'image:advanced;link:advanced;',
+                    'fillEmptyBlocks' => false,
+                    'basicEntities' => false,
+                ],
+            ));
         ;
     }
 

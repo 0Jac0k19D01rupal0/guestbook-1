@@ -28,7 +28,7 @@
                     </div>
                 {% endif %}
                 <div class="col-md">
-                    <div class="message-content">{{ message.text }}</div>
+                    <div class="message-content">{{ message.text | raw }}</div>
                 </div>
             </div>
             <div class="row message-bar">

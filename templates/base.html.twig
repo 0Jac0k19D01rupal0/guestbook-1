@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../main.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/148fb0c773.js"></script>
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../main.css">
+    {% endblock %}
 </head>
 <body>
     <!-- Navigation -->
@@ -54,8 +51,13 @@
     </nav>
     {% block body %}{% endblock %}
     <div id="particles-js"></div>
-    <script src="assets/js/particles.min.js"></script>
-    <script src="assets/js/app.js"></script>
-    {% block javascripts %}{% endblock %}
+    {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/148fb0c773.js"></script>
+        <script src="assets/js/particles.min.js"></script>
+        <script src="assets/js/app.js"></script>
+    {% endblock %}
 </body>
 </html>

@@ -34,18 +34,20 @@
                                 <label for="inputPassword">{{ 'auth.password'| trans }}</label>
                             </div>
 
-                            <div class="custom-control custom-checkbox mb-3">
+                            <div class="custom-control custom-checkbox mb-3 d-flex justify-content-between">
                                 <input type="checkbox" class="custom-control-input" id="customCheck1">
                                 <label class="custom-control-label" for="customCheck1">{{ 'auth.remember_password'| trans }}</label>
+                                <p class="text-center"><a href="{{ path('user_pwd_recovery') }}">{{ 'auth.pwd_recovery'| trans }}</a></p>
                             </div>
+
 
                             <input type="hidden" name="_csrf_token"
                                    value="{{ csrf_token('authenticate') }}"
                             >
 
-                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"><i class="fas fa-sign-in-alt"></i>{{ 'auth.login'| trans }}</button>
+                            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit"> <i class="fas fa-sign-in-alt"></i> {{ 'auth.login'| trans }}</button>
                             <hr class="my-4">
-                            <a class="btn btn-lg btn-success btn-block text-uppercase" href="{{ path('user_register') }}"><i class="fas fa-user-plus"></i>{{ 'auth.register'| trans }}</a>
+                            <a class="btn btn-lg btn-success btn-block text-uppercase" href="{{ path('user_register') }}"> <i class="fas fa-user-plus"></i> {{ 'auth.register'| trans }}</a>
                         </form>
                     </div>
                 </div>

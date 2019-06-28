@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Entity\User;
+use App\Entity\Verification;
+use App\Form\PwdRecoveryEmailType;
+use App\Form\PwdRecoveryNewPasswordType;
 use App\Form\RegistrationType;
 use App\Form\SortType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -22,9 +25,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
@@ -33,38 +34,68 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="user_register")
      */
-    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder,  \Swift_Mailer $mailer)
     {
-        // 1) постройте форму
+
         $user = new User();
         $form = $this->createForm(RegistrationType::class, $user);
+        $result = null;
 
-        // 2) обработайте отправку (произойдёт только в POST)
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Зашифруйте пароль (вы также можете сделать это через слушатель Doctrine)
             $password = $passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
 
             $user = $form->getData();
             $user->setCreatedAt(new \DateTime('now'));
 
-            // 4) сохраните Пользователя!
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // ... сделайте любую другую работу - вроде отправки письма и др
-            // может, установите "флеш" сообщение об успешном выполнении для пользователя
+            $verification = new Verification();
+            $verification->setUser($user);
+            $verification->setEmail($user->getEmail());
+            $verification->setToken(md5(microtime()));
+            $verification->setType('confirm_email');
+            $verification->setStatus(false);
+            $verification->setCreatedAt(new \DateTime('now'));
 
-            return $this->redirectToRoute('user_login');
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($verification);
+            $em->flush();
+
+            /* SEND MAIL */
+            if ($_ENV ['APP_ENV'] == 'dev') {
+                $link = 'http://127.0.0.1:8000/confirm_email/?token='.$verification->getToken();
+            }
+            else {
+                $link = $_SERVER['SERVER_NAME'].'/confirm_email/?token='.$verification->getToken();
+            }
+
+            $message = (new \Swift_Message('[GuestBook] Confirm Email'))
+                ->setFrom('myktm-dev@gmail.com')
+                ->setTo($user->getEmail())
+                ->setBody(
+                    $this->renderView('email/confirm_email.html.twig', [
+                        'name' => $user->getUsername(),
+                        'link' => $link,
+                        'domain' => $_SERVER['SERVER_NAME']
+                    ]),
+                    'text/html'
+                )
+            ;
+            $mailer->send($message);
+
+            $result = 'pages.register_success';
         }
 
         return $this->render(
-            'security/register.html.twig',
-            array('form' => $form->createView())
-        );
+            'security/register.html.twig', [
+                'form' => $form->createView(),
+                'result' => $result
+        ]);
     }
 
     /**
@@ -104,6 +135,153 @@ class SecurityController extends AbstractController
             'messages' => $messages,
             'picture_dir' => $this->getParameter('picture_path'),
             'img_support' => true,
+        ]);
+    }
+
+    /**
+     * @Route("/confirm_email", name="confirm_email")
+     */
+    public function confirm(Request $request)
+    {
+        $verification = $this->getDoctrine()
+            ->getRepository(Verification::class)
+            ->findOneByToken($request->query->get('token'));
+
+        if (is_null($verification) || $verification->getType() != 'confirm_email') {
+            return $this->redirectToRoute('message');
+        }
+        if ($verification->getStatus() == false) {
+            $verification->getUser()->setRoles(['ROLE_USER', 'CONFIRMED_EMAIL']);
+            $verification->setStatus(true);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($verification);
+            $em->flush();
+
+            $result = 'pages.confirm_email_success';
+        }
+        else {
+            $result = 'pages.confirm_email_error';
+        }
+
+        return $this->render('security/confirm_email.html.twig', [
+            'result' => $result
+        ]);
+    }
+
+    /**
+     * @Route("/recovery", name="user_pwd_recovery")
+     */
+    public function recovery(Request $request, \Swift_Mailer $mailer)
+    {
+        $form = $this->createForm(PwdRecoveryEmailType::class);
+        $form->handleRequest($request);
+        $result = null;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->findOneUserByEmail($form->getData()['email'])
+            ;
+
+            if (!is_null($user)) {
+                $verification = new Verification();
+                $verification->setUser($user);
+                $verification->setEmail($user->getEmail());
+                $verification->setToken(md5(microtime()));
+                $verification->setType('pwd_recovery');
+                $verification->setStatus(false);
+                $verification->setCreatedAt(new \DateTime('now'));
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($verification);
+                $em->flush();
+
+                /* SEND MAIL */
+                if ($_ENV ['APP_ENV'] == 'dev') {
+                    $link = 'http://127.0.0.1:8000/new_password/?token='.$verification->getToken();
+                }
+                else {
+                    $link = $_SERVER['SERVER_NAME'].'/new_password/?token='.$verification->getToken();
+                }
+
+                $message = (new \Swift_Message('[GuestBook] Recovery Password'))
+                    ->setFrom('myktm-dev@gmail.com')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView('email/pwd_recovery.html.twig', [
+                            'name' => $user->getUsername(),
+                            'link' => $link,
+                            'domain' => $_SERVER['SERVER_NAME']
+                        ]),
+                        'text/html'
+                    )
+                ;
+                $mailer->send($message);
+
+                $result = 'pages.recovery_success';
+            }
+            else {
+                $result = 'pages.recovery_error';
+            }
+
+        }
+
+        return $this->render('security/pwd_recovery.html.twig', [
+            'form' => $form->createView(),
+            'result' => $result
+        ]);
+    }
+
+    /**
+     * @Route("/new_password", name="user_new_pwd")
+     */
+    public function new_password(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $verification = $this->getDoctrine()
+            ->getRepository(Verification::class)
+            ->findOneByToken($request->query->get('token'));
+
+        if (is_null($verification) || $verification->getType() != 'pwd_recovery') {
+            return $this->redirectToRoute('message');
+        }
+
+        $form = $this->createForm(PwdRecoveryNewPasswordType::class);
+        $form->handleRequest($request);
+        $result = null;
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($verification->getStatus() == false) {
+                $password = $passwordEncoder->encodePassword($verification->getUser(), $form->getData()['plainPassword']);
+                $verification->getUser()->setpassword($password);
+                $verification->setStatus(true);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($verification);
+                $em->flush();
+
+                $result = 'pages.new_password_success';
+            }
+            else {
+                $result = 'pages.new_password_error';
+            }
+        }
+
+        return $this->render('security/new_password.html.twig', [
+            'form' => $form->createView(),
+            'result' => $result
+        ]);
+    }
+
+    /**
+     * @Route("/test", name="user_new_pwdd")
+     */
+    public function test()
+    {
+        return $this->render('email/pwd_recovery.html.twig', [
+            'name' => 'zomboy7',
+            'link' => $_SERVER['SERVER_NAME'],
+            'domain' => $_SERVER['SERVER_NAME']
         ]);
     }
 }

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'auth.confirm_email_title'| trans }}{% endblock %}
+
+{% block body %}
+    <div class="container signform">
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                <div class="card card-signin my-5">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ 'auth.confirm_email_title'| trans }}</h5>
+                        <div class="form-signin">
+                            <p class="text-center">{{ result | trans }}</p>
+                            <hr class="my-4">
+                            <a class="btn btn-lg btn-primary btn-block text-uppercase" href="{{ path('user_login') }}"><i class="fas fa-sign-in-alt"></i> {{ 'auth.login'| trans }}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

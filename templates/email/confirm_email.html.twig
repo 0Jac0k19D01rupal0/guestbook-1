@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <style>
+            body {
+                background: {{ absolute_url(asset('assets/img/bg.jpg')) }};
+            }
+        </style>
+    </head>
+    <body>
+        <h3>You did it! You registered!</h3>
+
+        Hi {{ name }}! You're successfully registered.
+
+        {# example, assuming you have a route named "login" #}
+        To confirm email, go to: <a href="{{ link }}">Click</a>.
+
+        Thanks!
+    </body>
+</html>

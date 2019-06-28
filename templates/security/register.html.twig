@@ -3,7 +3,6 @@
 {% block title %}★GuestBook★ | Sign Up{% endblock %}
 
 {% block body %}
-
     <div class="container signform">
         <div class="row">
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -14,13 +13,14 @@
                             or form_errors(form.email)
                             or form_errors(form.password)
                         %}
-                        <div class="alert alert-danger message-errors" role="alert">
-                            {{ form_errors(form.username) }}
-                            {{ form_errors(form.email) }}
-                            {{ form_errors(form.password) }}
-                        </div>
+                            <div class="alert alert-danger message-errors" role="alert">
+                                {{ form_errors(form.username) }}
+                                {{ form_errors(form.email) }}
+                                {{ form_errors(form.password) }}
+                            </div>
                         {% endif %}
                         <div class="form-signin">
+                            {% if result == null %}
                             {{ form_start(form) }}
                             <div class="form-label-group">
                                 {{ form_widget(form.username) }}
@@ -43,6 +43,9 @@
                             </div>
                             <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"><i class="fas fa-user-plus"></i> {{ 'auth.create_account'| trans }}</button>
                             {{ form_end(form) }}
+                            {% else %}
+                                <p class="text-center">{{ result | trans }}</p>
+                            {% endif %}
                             <hr class="my-4">
                             <a class="btn btn-lg btn-primary btn-block text-uppercase" href="{{ path('user_login') }}"><i class="fas fa-sign-in-alt"></i> {{ 'auth.login'| trans }}</a>
                         </div>

@@ -163,7 +163,6 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/message/{message}", name="single_message")
-     * @IsGranted("ROLE_USER")
      */
     public function message(Message $message)
     {

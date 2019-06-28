@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -64,6 +66,16 @@ class User implements UserInterface
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Verification", mappedBy="user")
+     */
+    private $verifications;
+
+    public function __construct()
+    {
+        $this->verifications = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -172,4 +184,36 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|Verification[]
+     */
+    public function getVerifications(): Collection
+    {
+        return $this->verifications;
+    }
+
+    public function addVerification(Verification $verification): self
+    {
+        if (!$this->verifications->contains($verification)) {
+            $this->verifications[] = $verification;
+            $verification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVerification(Verification $verification): self
+    {
+        if ($this->verifications->contains($verification)) {
+            $this->verifications->removeElement($verification);
+            // set the owning side to null (unless already changed)
+            if ($verification->getUser() === $this) {
+                $verification->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
