@@ -24,12 +24,12 @@ class MessageRepository extends ServiceEntityRepository
     //  * @return Message[] Returns an array of Message objects
     //  */
 
-    public function findAllOrderedByCol($col, $sort_Type, $limit, $first_result = null)
+    public function findAllOrderedByCol($col, $sort_Type)
     {
         return $this->createQueryBuilder('m')
             ->orderBy('m.'.$col, $sort_Type)
-            ->setFirstResult( $first_result )
-            ->setMaxResults( $limit )
+//            ->setFirstResult( $first_result )
+//            ->setMaxResults( $limit )
             ->getQuery()
             ->getResult()
         ;
@@ -58,12 +58,4 @@ class MessageRepository extends ServiceEntityRepository
         ;
     }
     */
-    public function findAllOrderedBy($col = 'username', $sort_type = 'ASC')
-    {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT p FROM App:Message p ORDER BY p.'.$col.' '.$sort_type
-            )
-            ->getResult();
-    }
 }

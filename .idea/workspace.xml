@@ -2,14 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f9f5c560-0b18-47b0-96f7-b3f0063f9892" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/config/packages/paginator.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/img/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/img/preloader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/assets/img/preloader1.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/preloader.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CommentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CommentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MessageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MessageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/message/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/message/create.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/MessageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/MessageRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/message/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/message/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/translations/messages.en.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/translations/messages.en.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,26 +29,56 @@
       <file leaf-file-name="MessageController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Controller/MessageController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1329">
-              <caret line="190" column="11" selection-start-line="190" selection-start-column="11" selection-end-line="190" selection-end-column="11" />
+            <state relative-caret-position="1460">
+              <caret line="94" column="57" selection-start-line="94" selection-start-column="57" selection-end-line="94" selection-end-column="57" />
+              <folding>
+                <element signature="e#34#57#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MessageRepository.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Repository/MessageRepository.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-11">
+              <caret line="26" column="39" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html.twig" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/message/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1260">
-              <caret line="63" column="60" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="60" />
+            <state relative-caret-position="534">
+              <caret line="91" column="56" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/message/create.html.twig">
+      <file leaf-file-name="SortType.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Form/SortType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+            <state relative-caret-position="280">
+              <caret line="18" column="34" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.html.twig" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="paginator.yaml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/packages/paginator.yaml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="11" column="67" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="67" />
             </state>
           </provider>
         </entry>
@@ -54,15 +86,19 @@
       <file leaf-file-name="messages.en.yaml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/translations/messages.en.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="25" column="5" selection-start-line="25" selection-end-line="25" selection-end-column="5" />
+            <state relative-caret-position="620">
+              <caret line="61" column="15" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="15" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bundles.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/bundles.php">
-          <provider selected="true" editor-type-id="text-editor" />
+      <file leaf-file-name="preloader.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/preloader.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -91,8 +127,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Service/UserService.php" />
-        <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/config/packages/swiftmailer.yaml" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/templates/security/profile.twig.html" />
@@ -121,9 +155,6 @@
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Helper/Captcha.php" />
         <option value="$PROJECT_DIR$/public/assets/js/app.js" />
-        <option value="$PROJECT_DIR$/public/main.css" />
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
-        <option value="$PROJECT_DIR$/src/Repository/MessageRepository.php" />
         <option value="$PROJECT_DIR$/config/routes.yaml" />
         <option value="$PROJECT_DIR$/src/Form/UpdateMessageType.php" />
         <option value="$PROJECT_DIR$/src/Entity/Message.php" />
@@ -137,11 +168,16 @@
         <option value="$PROJECT_DIR$/config/packages/security.yaml" />
         <option value="$PROJECT_DIR$/translations/messages.ua.yaml" />
         <option value="$PROJECT_DIR$/translations/messages.uk.yaml" />
-        <option value="$PROJECT_DIR$/templates/message/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CommentController.php" />
-        <option value="$PROJECT_DIR$/translations/messages.en.yaml" />
-        <option value="$PROJECT_DIR$/src/Controller/MessageController.php" />
         <option value="$PROJECT_DIR$/templates/message/create.html.twig" />
+        <option value="$PROJECT_DIR$/src/Repository/MessageRepository.php" />
+        <option value="$PROJECT_DIR$/public/main.css" />
+        <option value="$PROJECT_DIR$/public/preloader.css" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/MessageController.php" />
+        <option value="$PROJECT_DIR$/config/packages/paginator.yaml" />
+        <option value="$PROJECT_DIR$/translations/messages.en.yaml" />
+        <option value="$PROJECT_DIR$/templates/message/index.html.twig" />
       </list>
     </option>
   </component>
@@ -282,10 +318,10 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="71" />
-    <option name="y" value="22" />
-    <option name="width" value="1733" />
-    <option name="height" value="1055" />
+    <option name="x" value="109" />
+    <option name="y" value="85" />
+    <option name="width" value="1618" />
+    <option name="height" value="954" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -320,30 +356,12 @@
               <item name="guestbook" type="b2602c69:ProjectViewProjectNode" />
               <item name="guestbook" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guestbook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guestbook" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+              <item name="Form" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="guestbook" type="b2602c69:ProjectViewProjectNode" />
               <item name="guestbook" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guestbook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guestbook" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="comment" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="guestbook" type="b2602c69:ProjectViewProjectNode" />
-              <item name="guestbook" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="message" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="guestbook" type="b2602c69:ProjectViewProjectNode" />
@@ -427,12 +445,12 @@
       <workItem from="1562172672712" duration="1205000" />
       <workItem from="1562203853425" duration="597000" />
       <workItem from="1562693331138" duration="2209000" />
-      <workItem from="1563039022933" duration="30269000" />
+      <workItem from="1563039022933" duration="39226000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="238217000" />
+    <option name="totallyTimeSpent" value="247174000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -444,7 +462,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="71" y="22" width="1733" height="1055" extended-state="0" />
+    <frame x="109" y="85" width="1618" height="954" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32969433" />
@@ -453,7 +471,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.22850925" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24327555" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26123235" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32497275" />
@@ -496,34 +514,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Form/PwdRecoveryNewPasswordType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="40" selection-start-line="40" selection-end-line="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/email/pwd_recovery.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6360">
-          <caret line="318" column="38" selection-start-line="318" selection-start-column="38" selection-end-line="318" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/security/pwd_recovery.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="51" selection-start-line="2" selection-start-column="51" selection-end-line="2" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/email/confirm_email.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/PwdRecoveryEmailType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -607,9 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Service/UserService.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Helper/Captcha.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -648,20 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="4" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -787,13 +760,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/MessageRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
-          <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/bundles.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -807,31 +773,84 @@
     <entry file="file://$PROJECT_DIR$/templates/comment/form.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/translations/messages.en.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="5" selection-start-line="25" selection-end-line="25" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/message/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
-          <caret line="63" column="60" selection-start-line="63" selection-start-column="38" selection-end-line="63" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/MessageController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1329">
-          <caret line="190" column="11" selection-start-line="190" selection-start-column="11" selection-end-line="190" selection-end-column="11" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/Service/UserService.php">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/message/create.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="6" column="35" selection-start-line="6" selection-start-column="35" selection-end-line="6" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/preloader.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/MessageRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="26" column="39" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/knplabs/knp-paginator-bundle/Pagination/SlidingPagination.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3726" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/MessageController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1460">
+          <caret line="94" column="57" selection-start-line="94" selection-start-column="57" selection-end-line="94" selection-end-column="57" />
+          <folding>
+            <element signature="e#34#57#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/translations/messages.en.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="620">
+          <caret line="61" column="15" selection-start-line="61" selection-start-column="15" selection-end-line="61" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/paginator.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="11" column="67" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Form/SortType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/message/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="91" column="56" selection-start-line="91" selection-start-column="56" selection-end-line="91" selection-end-column="56" />
         </state>
       </provider>
     </entry>

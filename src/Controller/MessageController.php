@@ -6,6 +6,7 @@ use App\Entity\Message;
 use App\Form\MessageType;
 use App\Form\SortType;
 use App\Helper\Captcha;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,24 +22,34 @@ class MessageController extends AbstractController
     /**
      * @Route("/", name="message")
      */
-    public function index(Request $request, Captcha $captcha)
+    public function index(Request $request, Captcha $captcha, PaginatorInterface $paginator)
     {
         /* SORT FORM */
-        $sort_form = $this->createForm(SortType::class);
-        $sort_form->handleRequest($request);
-        if ($sort_form->isSubmitted() && $sort_form->isValid()) {
+//        $sort_form = $this->createForm(SortType::class);
+//        $sort_form->handleRequest($request);
+//        if ($sort_form->isSubmitted() && $sort_form->isValid()) {
+//
+//            $sort = $sort_form->getData()['sort'];
+//            $sort = explode('.', $sort, 2);
+//
+//            $em = $this->getDoctrine()->getManager();
+//            $messages_query = $em->getRepository(Message::class)->findAllOrderedByCol($sort[0], $sort[1]);
+//        }
+//        else {
+//            $em = $this->getDoctrine()->getManager();
+//            $messages_query = $em->getRepository(Message::class)->findBy(array(), array('id' => 'DESC'));
+//        }
 
-            $sort = $sort_form->getData()['sort'];
-            $sort = explode('.', $sort, 2);
+        $em = $this->getDoctrine()->getManager();
+        $messages_query = $em->getRepository(Message::class)->findBy(array(), array('id' => 'DESC'));
 
-            $messages = $this->getDoctrine()
-                ->getRepository(Message::class)
-                ->findAllOrderedByCol($sort[0], $sort[1], 25);
-        }
-        else {
-            $em = $this->getDoctrine()->getManager();
-            $messages = $em->getRepository(Message::class)->findBy(array(), array('id' => 'DESC'));
-        }
+        /* PAGINATION */
+
+        $messages = $paginator->paginate(
+            $messages_query,
+            $request->query->getInt('page', 1),
+            5
+        );
 
         /* MESSAGE FORM */
         $message_entity = new Message();
@@ -82,7 +93,6 @@ class MessageController extends AbstractController
 
 
         return $this->render('message/index.html.twig', [
-            'sort_form' => $sort_form->createView(),
             'form' => $form->createView(),
             'messages' => $messages,
             'picture_dir' => $this->getParameter('picture_path'),

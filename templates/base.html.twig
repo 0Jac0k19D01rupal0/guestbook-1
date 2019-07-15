@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('preloader.css') }}">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('main.css') }}">
     {% endblock %}
@@ -12,10 +13,25 @@
     {% endblock %}
 </head>
 <body>
+    <!-- Preloader -->
+    <div id="preloader" class="visible"></div>
+    <script type="text/javascript">
+        function loadData() {
+            return new Promise((resolve, reject) => {
+                setTimeout(resolve, 1000);
+            })
+        }
+        loadData()
+            .then(() => {
+                let preloaderEl = document.getElementById('preloader');
+                preloaderEl.classList.add('hidden');
+                preloaderEl.classList.remove('visible');
+            });
+    </script>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light static-top mb-5 shadow">
         <div class="container">
-            <a class="navbar-brand" href="{{ path('message') }}">GuestBook</a>
+            <a class="navbar-brand" href="{{ path('message') }}"><img src="{{ asset('assets/img/logo.png') }}" width="35"> GuestBook</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

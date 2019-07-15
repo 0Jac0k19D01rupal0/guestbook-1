@@ -53,10 +53,13 @@ buttons:
   new_password: 'Change password'
 
 forms:
+  sort_id: 'Id'
   sort_id_desc: 'Recently ↓'
   sort_id_asc: 'Latest ↑'
+  sort_username: 'Username'
   sort_username_desc: 'Username A-Z ↓'
   sort_username_asc: 'Username Z-A ↑'
+  sort_email: 'Email'
   sort_email_desc: 'Email A-Z ↓'
   sort_email_asc: 'Email Z-A ↑'
   message_username: 'Ваше имя'
