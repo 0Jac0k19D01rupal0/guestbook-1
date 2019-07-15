@@ -1,17 +1,16 @@
 # [PHP, Symfony 4] Guestbook
----
+
 ![GuestBook](https://gb.root7.ru/assets/img/preloader1.gif)
 Guestbook allows site users to leave messages on the site. All data entered by the user are stored in the MySQL database, and the database stores the data about the IP user and its information about the browser.
 **Developed by Symfony 4** | [Example: GuestBook](https://gb.root7.ru)
 
 ## Requirements for project deployment
----
+
 * PHP 7.2 =<
 * Composer
 * Web server **Apache 2**
 
 ## How to Deploy Project
----
 
 1. Cloning repository: `git clone https://github.com/zomboy7/guestbook.git`
 2. Rename project forder `mv guestbook <your_domain>` and enter folder `cd <you_domain>`
