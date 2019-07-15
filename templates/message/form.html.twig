@@ -1,44 +1,49 @@
 {{ form_start(form) }}
-        {% if form_errors(form.username)
-            or form_errors(form.email)
-            or form_errors(form.text)
-            or form_errors(form.picture)
-        %}
-            <div class="alert alert-danger message-errors" role="alert">
-                {{ form_errors(form.username) }}
-                {{ form_errors(form.email) }}
-                {{ form_errors(form.homepage) }}
-                {{ form_errors(form.text) }}
-                {{ form_errors(form.picture) }}
+    {% if form_errors(form.username)
+        or form_errors(form.email)
+        or form_errors(form.text)
+        or form_errors(form.homepage)
+        or form_errors(form.picture)
+    %}
+        <div class="alert alert-danger message-errors" role="alert">
+            {{ form_errors(form.username) }}
+            {{ form_errors(form.email) }}
+            {{ form_errors(form.homepage) }}
+            {{ form_errors(form.text) }}
+            {{ form_errors(form.picture) }}
+        </div>
+    {% endif %}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form_widget(form.username) }}
+        </div>
+        <div class="form-group col-md-4">
+            {{ form_widget(form.email) }}
+        </div>
+        <div class="form-group col-md-4">
+            <label class="sr-only" for="inlineFormInputGroupUsername">Имя пользователя</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">https://</div>
+                </div>
+                {{ form_widget(form.homepage) }}
             </div>
-        {% endif %}
-<div class="form-row">
-    <div class="form-group col-md-4">
-        {{ form_widget(form.username) }}
-    </div>
-    <div class="form-group col-md-4">
-        {{ form_widget(form.email) }}
-    </div>
-    <div class="form-group col-md-4">
-        <label class="sr-only" for="inlineFormInputGroupUsername">Имя пользователя</label>
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <div class="input-group-text">https://</div>
-            </div>
-            {{ form_widget(form.homepage) }}
         </div>
     </div>
-</div>
-<div class="form-group">
-    {{ form_widget(form.text) }}
-</div>
-<div class="form-row">
-    <div class="form-group col-md-6 form-load-files">
-        {{ form_widget(form.picture) }}
-        <label>{{ form_label(form.picture) }}</label>
+    <div class="form-group">
+        {{ form_widget(form.text) }}
     </div>
-    <div class="col-md-6">
-        <button class="btn btn-primary float-right form-message-btn" type="submit">SendMessage</button>
+
+    <div class="form-row">
+        <div class="form-group col-md-6 form-load-files">
+            {{ form_widget(form.picture) }}
+            <label>{{ form_label(form.picture) }}</label>
+        </div>
+        <div class="col-md-6">
+            <div class="g-recaptcha float-right" data-sitekey="6LdSnK0UAAAAAKuQa-4WpVyvmOEBVhzLGv1XM-r-"></div>
+        </div>
+        <div class="col">
+            <button class="btn btn-primary float-right form-message-btn" type="submit">SendMessage</button>
+        </div>
     </div>
-</div>
 {{ form_end(form) }}

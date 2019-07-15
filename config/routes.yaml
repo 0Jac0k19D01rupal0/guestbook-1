@@ -15,7 +15,7 @@ create_message:
     defaults:  {_locale: '%locale%'}
 
 update_message:
-    path:     /{_locale}/message/update
+    path:     /{_locale}/message/update/{message}
     controller: App\Controller\MessageController::update
     requirements: {_locale: "%router.locales%"}
     defaults:  {_locale: '%locale%'}

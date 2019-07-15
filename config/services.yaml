@@ -6,6 +6,7 @@
 parameters:
     locale: 'en'
     router.locales: uk|ru|en
+    message-limit: 25
 
     picture_dir: '%kernel.project_dir%/public/uploads/pictures'
     picture_path: '/uploads/pictures'

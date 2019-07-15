@@ -21,6 +21,7 @@ auth:
   recovery_title: 'Password Recovery'
   new_password_title: 'Change Password'
   confirm_email_title: 'Confirm Email'
+  profile: 'Go to profile'
 
 pages:
   messages: 'Guestbook'

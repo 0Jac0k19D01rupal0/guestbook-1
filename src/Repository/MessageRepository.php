@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Message;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 
 /**
  * @method Message|null find($id, $lockMode = null, $lockVersion = null)
@@ -23,10 +24,12 @@ class MessageRepository extends ServiceEntityRepository
     //  * @return Message[] Returns an array of Message objects
     //  */
 
-    public function findAllOrderedByCol($col, $sort_Type)
+    public function findAllOrderedByCol($col, $sort_Type, $limit, $first_result = null)
     {
         return $this->createQueryBuilder('m')
             ->orderBy('m.'.$col, $sort_Type)
+            ->setFirstResult( $first_result )
+            ->setMaxResults( $limit )
             ->getQuery()
             ->getResult()
         ;

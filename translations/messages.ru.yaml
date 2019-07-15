@@ -18,6 +18,7 @@ auth:
   terms_accepted: 'Я прочитал и согласен с условиями'
   pwd_recovery: 'Забыл пароль?'
   recovery_title: 'Восстановление пароля'
+  profile: 'Перейти в профиль'
 
 pages:
   messages: 'Гостевая книга'

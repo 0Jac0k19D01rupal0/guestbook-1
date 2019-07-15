@@ -50,6 +50,7 @@ class MessageType extends AbstractType
             ->add('picture', FileType::class, [
                 'label' => 'forms.message_file_type',
                 'attr' => ['class' => 'form-control-file'],
+                'data' => $options['picture'] ?? null,
                 'required' => false
             ])
             ->add('text', CKEditorType::class, array(
@@ -91,6 +92,6 @@ class MessageType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Message::class,
         ]);
-        $resolver->setRequired(['userdata']);
+        $resolver->setRequired(['userdata', 'picture']);
     }
 }

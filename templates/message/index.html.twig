@@ -1,6 +1,6 @@
 {% extends 'basepage.html.twig' %}
 
-{% block title %}★GuestBook★{% endblock %}
+{% block title %}Messages{% endblock %}
 
 {% block content %}
         <div class="row">
@@ -42,7 +42,7 @@
                                 <span>{{ message.email }}</span>
                             </div>
                             <div class="message-content">
-                                    {{ message.text|length > 700 ? message.text|slice(0, 700) ~ '...' : message.text | raw }}
+                                    {{ message.text|length > 700 ? (message.text|slice(0, 700) ~ '...')|raw : message.text|raw }}
                             </div>
                         </div>
                     </div>

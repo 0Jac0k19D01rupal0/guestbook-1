@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -108,7 +109,7 @@ class SecurityController extends AbstractController
 
     /**
      * @Route("/profile", name="user_profile")
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function profile(Request $request, UserInterface $user)
     {
@@ -151,7 +152,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('message');
         }
         if ($verification->getStatus() == false) {
-            $verification->getUser()->setRoles(['ROLE_USER', 'CONFIRMED_EMAIL']);
+            $verification->getUser()->setRoles(['ROLE_USER']);
             $verification->setStatus(true);
 
             $em = $this->getDoctrine()->getManager();
@@ -159,6 +160,10 @@ class SecurityController extends AbstractController
             $em->flush();
 
             $result = 'pages.confirm_email_success';
+
+            $token = new UsernamePasswordToken($verification->getUser(), null, 'main', $user->getRoles());
+            $this->get('security.token_storage')->setToken($token);
+            $this->get('session')->set('_security_main', serialize($token));
         }
         else {
             $result = 'pages.confirm_email_error';
