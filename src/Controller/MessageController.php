@@ -186,7 +186,8 @@ class MessageController extends AbstractController
         }
 
         return $this->render('message/create.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'form_title' => 'pages.update_message'
         ]);
     }
 

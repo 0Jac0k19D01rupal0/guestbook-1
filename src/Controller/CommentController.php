@@ -15,7 +15,7 @@ class CommentController extends AbstractController
 {
     /**
      * @Route("/comment/create/{message}", name="comment_create_form")
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function create(Request $request, Message $message, UserInterface $user = null)
     {

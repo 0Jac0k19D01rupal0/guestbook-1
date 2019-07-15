@@ -3,6 +3,12 @@
 {% block title %}New message{% endblock %}
 
 {% block content %}
-    <h3 class="font-weight-light">New message</h3>
+    <h3 class="font-weight-light">
+        {% if form_title is defined %}
+            {{ form_title | trans}}
+        {% else %}
+            {{ 'pages.new_message' | trans}}
+        {% endif %}
+    </h3>
     {% include 'message/form.html.twig' %}
 {% endblock %}

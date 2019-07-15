@@ -26,6 +26,8 @@ auth:
 pages:
   messages: 'Guestbook'
   profile: 'Profile'
+  new_message: 'New Message'
+  update_message: 'Update Message'
   total_messages: 'Total messages'
   your_messages: 'Your messages'
   delete_message: 'Deleting message'
