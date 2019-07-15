@@ -1,6 +1,6 @@
 # [PHP, Symfony 4] Guestbook
 
-<center>![GuestBook](https://gb.root7.ru/assets/img/preloader1.gif)</center>
+![GuestBook](https://gb.root7.ru/assets/img/preloader1.gif) <br>
 Guestbook allows site users to leave messages on the site. All data entered by the user are stored in the MySQL database, and the database stores the data about the IP user and its information about the browser.
 **Developed by Symfony 4** | [Example: GuestBook](https://gb.root7.ru)
 
@@ -35,9 +35,8 @@ Guestbook allows site users to leave messages on the site. All data entered by t
 8. Configure database:
     1. Create base `php bin/console doctrine:database:create`
     2. Make migrations `php bin/console make:migrations` and migrate `php bin/console doctrine:migrations:migrate`
-9. Change chmod `chmod 777 public/uploads/pictures`
+9. Add permissoins `chmod 777 public/uploads/pictures`
 10. Go to your web-site
-
 ### More documentation
 [Configuring Symfony](https://symfony.com/doc/current/configuration.html)<br>
 [How to deploy a Symfony Application](https://symfony.com/doc/current/deployment.html)
