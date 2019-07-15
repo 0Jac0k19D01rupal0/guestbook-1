@@ -68,12 +68,7 @@ class SecurityController extends AbstractController
             $em->flush();
 
             /* SEND MAIL */
-            if ($_ENV ['APP_ENV'] == 'dev') {
-                $link = 'http://127.0.0.1:8000/confirm_email/?token='.$verification->getToken();
-            }
-            else {
-                $link = $_SERVER['SERVER_NAME'].'/confirm_email/?token='.$verification->getToken();
-            }
+            $link = $_SERVER['SERVER_NAME'].'/confirm_email/?token='.$verification->getToken();
 
             $message = (new \Swift_Message('[GuestBook] Confirm Email'))
                 ->setFrom('myktm-dev@gmail.com')
@@ -161,7 +156,7 @@ class SecurityController extends AbstractController
 
             $result = 'pages.confirm_email_success';
 
-            $token = new UsernamePasswordToken($verification->getUser(), null, 'main', $user->getRoles());
+            $token = new UsernamePasswordToken($verification->getUser(), null, 'main', $verification->getUser()->getRoles());
             $this->get('security.token_storage')->setToken($token);
             $this->get('session')->set('_security_main', serialize($token));
         }
@@ -203,12 +198,7 @@ class SecurityController extends AbstractController
                 $em->flush();
 
                 /* SEND MAIL */
-                if ($_ENV ['APP_ENV'] == 'dev') {
-                    $link = 'http://127.0.0.1:8000/new_password/?token='.$verification->getToken();
-                }
-                else {
-                    $link = $_SERVER['SERVER_NAME'].'/new_password/?token='.$verification->getToken();
-                }
+                $link = $_SERVER['SERVER_NAME'].'/new_password/?token='.$verification->getToken();
 
                 $message = (new \Swift_Message('[GuestBook] Recovery Password'))
                     ->setFrom('myktm-dev@gmail.com')
@@ -275,18 +265,6 @@ class SecurityController extends AbstractController
         return $this->render('security/new_password.html.twig', [
             'form' => $form->createView(),
             'result' => $result
-        ]);
-    }
-
-    /**
-     * @Route("/test", name="user_new_pwdd")
-     */
-    public function test()
-    {
-        return $this->render('email/pwd_recovery.html.twig', [
-            'name' => 'zomboy7',
-            'link' => $_SERVER['SERVER_NAME'],
-            'domain' => $_SERVER['SERVER_NAME']
         ]);
     }
 }
