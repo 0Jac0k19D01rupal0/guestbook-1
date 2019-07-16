@@ -9,7 +9,7 @@
                 {#{{ form_start(sort_form) }}#}
                 {#{{ form_widget(sort_form.sort) }}#}
                 {#{{ form_end(sort_form) }}#}
-                Sort by:
+                {{ 'pages.sort_by' | trans }}
                 {{ knp_pagination_sortable(messages, 'forms.sort_id'|trans, 'id') }} |
                 {{ knp_pagination_sortable(messages, 'forms.sort_username'|trans, 'username') }} |
                 {{ knp_pagination_sortable(messages, 'forms.sort_email'|trans, 'email') }}
@@ -29,7 +29,14 @@
         {% include 'message/form.html.twig' %}
     </div>
     {% endif %}
-
+    {% if send_message == true %}
+        <div class="alert alert-success" role="alert">
+            {{ 'pages.send_message' | trans }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="$(".alert").alert('close')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
     {% if messages != null %}
         {% for message in messages %}
             <div class="card message-block">

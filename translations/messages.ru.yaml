@@ -23,13 +23,14 @@ auth:
 pages:
   messages: 'Гостевая книга'
   profile: 'Мой профиль'
-  total_messages: 'Всего сообщений'
+  total_messages: 'Сообщений на странице'
   your_messages: 'Ваши сообщения'
   delete_message: 'Удаление сообщения'
   delete_question: 'Вы уверены что хотите удалить сообщение?'
   delete_info: 'Востановить его будет невозможно'
   recovery_error: 'Почта не была найдена'
   recovery_success: 'Вам на почту отправлено письмо с инструкцией по восстановлению пароля'
+  sort_by: 'Сортировать по:'
 
 buttons:
   read: 'Читать'
@@ -42,10 +43,13 @@ buttons:
   sent_to_mail: 'Восстановить'
 
 forms:
+  sort_id: 'Дате'
   sort_id_desc: 'Новые ↓'
   sort_id_asc: 'Последние ↑'
+  sort_username: 'Имени'
   sort_username_desc: 'По имени A-Z ↓'
   sort_username_asc: 'По имени Z-A ↑'
+  sort_email: 'Почте'
   sort_email_desc: 'По почте A-Z ↓'
   sort_email_asc: 'По почте Z-A ↑'
   message_username: 'Ваше имя'

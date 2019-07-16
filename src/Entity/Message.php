@@ -73,6 +73,11 @@ class Message
      */
     private $picture;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $is_enabled = false;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -206,6 +211,18 @@ class Message
     public function setPicture(?string $picture): self
     {
         $this->picture = $picture;
+
+        return $this;
+    }
+
+    public function getIsEnabled(): ?bool
+    {
+        return $this->is_enabled;
+    }
+
+    public function setIsEnabled(bool $is_enabled): self
+    {
+        $this->is_enabled = $is_enabled;
 
         return $this;
     }

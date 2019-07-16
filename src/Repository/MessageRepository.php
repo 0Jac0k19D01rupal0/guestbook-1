@@ -28,6 +28,7 @@ class MessageRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('m')
             ->orderBy('m.'.$col, $sort_Type)
+            ->andWhere('m.is_enabled = true')
 //            ->setFirstResult( $first_result )
 //            ->setMaxResults( $limit )
             ->getQuery()

@@ -9,6 +9,27 @@
             <div class="card-body p-5">
                 {% block content %}{% endblock %}
             </div>
+            <div class="card-body p-5 bg-light footer">
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <h6>Change language</h6>
+                        <a class="text-decoration-none" href="{{ path('message', {'_locale': 'en'}) }}">
+                            <img src="{{ asset('assets/img/us.svg') }}" title="EN" width="50">
+                        </a>
+                        <a class="text-decoration-none" href="{{ path('message', {'_locale': 'ru'}) }}">
+                            <img src="{{ asset('assets/img/ru.svg') }}" title="RU" width="50">
+                        </a>
+                        <a class="text-decoration-none" href="{{ path('message', {'_locale': 'uk'}) }}">
+                            <img src="{{ asset('assets/img/ua.svg') }}" title="UA" width="50">
+                        </a>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <h6>Powered by</h6>
+                        <a href="https://root7/" class="d-block">Root7</a>
+                        <a href="https://github.com/zomboy7">Github</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -23,13 +23,14 @@ auth:
 pages:
   messages: 'Гостьова книга'
   profile: 'Мій профіль'
-  total_messages: 'Всього повідомлень'
+  total_messages: 'Повідомлень на сторінці'
   your_messages: 'Ваші повідомлення'
   delete_message: 'Видалення повідомлення'
   delete_question: 'Ви впевнені що хочете видалити повідомлення?'
   delete_info: 'Відновити його буде неможливо'
   recovery_error: 'Почта не була знайдена'
   recovery_success: 'Вам на пошту було відправлено лист з інструкцією для відновлення пароля'
+  sort_by: 'Сортувати по:'
 
 buttons:
   read: 'Читати'
@@ -42,10 +43,13 @@ buttons:
   sent_to_mail: 'Відновити'
 
 forms:
+  sort_id: 'Дані'
   sort_id_desc: 'Нові ↓'
   sort_id_asc: 'Старі ↑'
+  sort_username: 'Імені'
   sort_username_desc: 'По імені A-Z ↓'
   sort_username_asc: 'По імені Z-A ↑'
+  sort_email: 'Email'
   sort_email_desc: 'По пошті A-Z ↓'
   sort_email_asc: 'По пошті Z-A ↑'
   message_username: 'Ваше ім я'

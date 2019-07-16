@@ -6,7 +6,8 @@
 parameters:
     locale: 'en'
     router.locales: uk|ru|en
-    message-limit: 25
+    captcha_public_key: '6LdSnK0UAAAAAKuQa-4WpVyvmOEBVhzLGv1XM-r-'
+    captcha_secret_key: '6LdSnK0UAAAAAHuFmWnnciYiN923rAjaDPiJhKCs'
 
     picture_dir: '%kernel.project_dir%/public/uploads/pictures'
     picture_path: '/uploads/pictures'

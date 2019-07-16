@@ -5,6 +5,7 @@ menu:
   login: 'Sing In'
   profile: 'Profile'
   logout: 'Logout'
+  admin: 'Adminpanel'
 
 auth:
   login: 'Sign in'
@@ -28,7 +29,7 @@ pages:
   profile: 'Profile'
   new_message: 'New Message'
   update_message: 'Update Message'
-  total_messages: 'Total messages'
+  total_messages: 'Messages on page'
   your_messages: 'Your messages'
   delete_message: 'Deleting message'
   delete_question: 'Are you sure you want to delete the message?'
@@ -40,6 +41,8 @@ pages:
   register_success: 'Registration is completed! А confirmation email has been sent to your email'
   confirm_email_success: 'Email has been successfully verified'
   confirm_email_error: 'Email has already been verified'
+  send_message: 'The message has been sent to moderation, it will appear soon'
+  sort_by: 'Sort by:'
 
 buttons:
   read: 'Read'
@@ -53,7 +56,7 @@ buttons:
   new_password: 'Change password'
 
 forms:
-  sort_id: 'Id'
+  sort_id: 'Date'
   sort_id_desc: 'Recently ↓'
   sort_id_asc: 'Latest ↑'
   sort_username: 'Username'

@@ -24,24 +24,8 @@ class MessageController extends AbstractController
      */
     public function index(Request $request, Captcha $captcha, PaginatorInterface $paginator)
     {
-        /* SORT FORM */
-//        $sort_form = $this->createForm(SortType::class);
-//        $sort_form->handleRequest($request);
-//        if ($sort_form->isSubmitted() && $sort_form->isValid()) {
-//
-//            $sort = $sort_form->getData()['sort'];
-//            $sort = explode('.', $sort, 2);
-//
-//            $em = $this->getDoctrine()->getManager();
-//            $messages_query = $em->getRepository(Message::class)->findAllOrderedByCol($sort[0], $sort[1]);
-//        }
-//        else {
-//            $em = $this->getDoctrine()->getManager();
-//            $messages_query = $em->getRepository(Message::class)->findBy(array(), array('id' => 'DESC'));
-//        }
-
         $em = $this->getDoctrine()->getManager();
-        $messages_query = $em->getRepository(Message::class)->findBy(array(), array('id' => 'DESC'));
+        $messages_query = $em->getRepository(Message::class)->findBy(array('is_enabled' => true), array('id' => 'DESC'));
 
         /* PAGINATION */
 
@@ -61,7 +45,7 @@ class MessageController extends AbstractController
 
         $recaptcha = $request->get('g-recaptcha-response');
         if ($form->isSubmitted() && $form->isValid() && !empty($recaptcha)) {
-            if ($captcha->request($recaptcha)->success == true) {
+            if ($captcha->request($this->getParameter('captcha_secret_key') ,$recaptcha)->success == true) {
                 $message_entity = $form->getData();
                 $message_entity->setCreatedAt(new \DateTime('now'));
                 $message_entity->setUserIp($request->getClientIp());
@@ -97,6 +81,8 @@ class MessageController extends AbstractController
             'messages' => $messages,
             'picture_dir' => $this->getParameter('picture_path'),
             'img_support' => true,
+            'captcha_key' => $this->getParameter('captcha_public_key'),
+            'send_message' => $request->get('send_message') ? true : false
         ]);
     }
 
@@ -115,7 +101,7 @@ class MessageController extends AbstractController
 
         $recaptcha = $request->get('g-recaptcha-response');
         if ($form->isSubmitted() && $form->isValid() && !empty($recaptcha)) {
-            if ($captcha->request($recaptcha)->success == true) {
+            if ($captcha->request($this->getParameter('captcha_secret_key') ,$recaptcha)->success == true) {
                 $message_entity = $form->getData();
                 $message_entity->setCreatedAt(new \DateTime('now'));
                 $message_entity->setUserIp($request->getClientIp());
@@ -132,12 +118,13 @@ class MessageController extends AbstractController
                 $em->persist($message_entity);
                 $em->flush();
 
-                return $this->redirectToRoute('message');
+                return $this->redirectToRoute('message', ['send_message' => true]);
             }
         }
         return $this->render('message/create.html.twig', [
             'form' => $form->createView(),
             'picture_dir' => $this->getParameter('picture_path'),
+            'captcha_key' => $this->getParameter('captcha_public_key')
         ]);
     }
 
@@ -172,7 +159,7 @@ class MessageController extends AbstractController
 
             $recaptcha = $request->get('g-recaptcha-response');
             if ($form->isSubmitted() && $form->isValid() && !empty($recaptcha)) {
-                if ($captcha->request($recaptcha)->success == true) {
+                if ($captcha->request($this->getParameter('captcha_secret_key') ,$recaptcha)->success == true) {
                     $message = $form->getData();
                     $message->setUpdatedAt(new \DateTime('now'));
 
@@ -187,7 +174,7 @@ class MessageController extends AbstractController
                     $em = $this->getDoctrine()->getManager();
                     $em->flush();
 
-                    return $this->redirectToRoute('user_profile');
+                    return $this->redirectToRoute('message', ['send_message' => true]);
                 }
             }
         }
@@ -197,7 +184,8 @@ class MessageController extends AbstractController
 
         return $this->render('message/create.html.twig', [
             'form' => $form->createView(),
-            'form_title' => 'pages.update_message'
+            'form_title' => 'pages.update_message',
+            'captcha_key' => $this->getParameter('captcha_public_key')
         ]);
     }
 
@@ -207,7 +195,6 @@ class MessageController extends AbstractController
     public function message(Message $message)
     {
         $title = substr($message->getText(), 0, 20);
-        $title = '★'.$message->getUsername().'★ '.$title;
 
         return $this->render('message/single.html.twig', [
             'title' => $title,
