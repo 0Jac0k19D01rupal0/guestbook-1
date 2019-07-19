@@ -37,6 +37,15 @@ Guestbook allows site users to leave messages on the site. All data entered by t
     2. Make migrations `php bin/console make:migrations` and migrate `php bin/console doctrine:migrations:migrate`
 9. Go to your web-site
 
-### More documentation
+#### More documentation
 [Configuring Symfony](https://symfony.com/doc/current/configuration.html)
 [How to deploy a Symfony Application](https://symfony.com/doc/current/deployment.html)
+
+## How load fixtures
+Fixtures have already been made, you only need to load them with the command:
+`php bin/console doctrine:fixtures:load`
+
+## How add new Admin
+Admin can be added using the command:
+`php bin/console guestbook:admin <username>`
+where `<username>` - it is username new admin
