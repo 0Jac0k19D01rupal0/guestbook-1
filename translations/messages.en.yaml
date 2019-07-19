@@ -43,6 +43,7 @@ pages:
   confirm_email_error: 'Email has already been verified'
   send_message: 'The message has been sent to moderation, it will appear soon'
   sort_by: 'Sort by:'
+  single_message: 'Message'
 
 buttons:
   read: 'Read'

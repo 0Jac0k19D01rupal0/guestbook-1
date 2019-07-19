@@ -78,7 +78,7 @@ class MessageType extends AbstractType
                         'colors',
                         'about',
                     ],
-                    'removeButtons' => 'Save,NewPage,Preview,Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Superscript,Scayt,Flash,Image,About',
+                    'removeButtons' => 'Save,NewPage,Preview,Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Superscript,Scayt,Flash,Image,About,Table',
                     'removeDialogTabs' => 'image:advanced;link:advanced;',
                     'fillEmptyBlocks' => false,
                     'basicEntities' => false,

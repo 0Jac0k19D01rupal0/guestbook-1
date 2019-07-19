@@ -11,6 +11,7 @@ use App\Form\RegistrationType;
 use App\Form\SortType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,46 +46,60 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
-            $user->setPassword($password);
-
-            $user = $form->getData();
-            $user->setCreatedAt(new \DateTime('now'));
-
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $find_email = $em->getRepository(User::class)->findOneBy(['email' => $form->get('email')->getData()]);
+            $find_username = $em->getRepository(User::class)->findOneBy(['username' => $form->get('username')->getData()]);
+            if (is_null($find_email) && is_null($find_username)) {
+                $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+                $user->setPassword($password);
 
-            $verification = new Verification();
-            $verification->setUser($user);
-            $verification->setEmail($user->getEmail());
-            $verification->setToken(md5(microtime()));
-            $verification->setType('confirm_email');
-            $verification->setStatus(false);
-            $verification->setCreatedAt(new \DateTime('now'));
+                $user = $form->getData();
+                $user->setCreatedAt(new \DateTime('now'));
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($verification);
-            $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
 
-            /* SEND MAIL */
-            $link = $_SERVER['SERVER_NAME'].'/confirm_email/?token='.$verification->getToken();
+                $verification = new Verification();
+                $verification->setUser($user);
+                $verification->setEmail($user->getEmail());
+                $verification->setToken(md5(microtime()));
+                $verification->setType('confirm_email');
+                $verification->setStatus(false);
+                $verification->setCreatedAt(new \DateTime('now'));
 
-            $message = (new \Swift_Message('[GuestBook] Confirm Email'))
-                ->setFrom('myktm-dev@gmail.com')
-                ->setTo($user->getEmail())
-                ->setBody(
-                    $this->renderView('email/confirm_email.html.twig', [
-                        'name' => $user->getUsername(),
-                        'link' => $link,
-                        'domain' => $_SERVER['SERVER_NAME']
-                    ]),
-                    'text/html'
-                )
-            ;
-            $mailer->send($message);
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($verification);
+                $em->flush();
 
-            $result = 'pages.register_success';
+                /* SEND MAIL */
+                $link = $_SERVER['SERVER_NAME'].'/confirm_email/?token='.$verification->getToken();
+
+                $message = (new \Swift_Message('[GuestBook] Confirm Email'))
+                    ->setFrom('myktm-dev@gmail.com')
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView('email/confirm_email.html.twig', [
+                            'name' => $user->getUsername(),
+                            'link' => $link,
+                            'domain' => $_SERVER['SERVER_NAME']
+                        ]),
+                        'text/html'
+                    )
+                ;
+                $mailer->send($message);
+
+                $result = 'pages.register_success';
+            }
+            else {
+                if (is_null($find_email)) {
+                    $form->get('email')->addError(new FormError('A user with this email already exists!'));
+                }
+                if (is_null($find_username)) {
+                    $form->get('username')->addError(new FormError('A user with this username already exists!'));
+                }
+
+            }
         }
 
         return $this->render(

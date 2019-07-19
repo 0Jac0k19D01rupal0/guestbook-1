@@ -8,6 +8,7 @@ use App\Form\SortType;
 use App\Helper\Captcha;
 use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,8 +45,8 @@ class MessageController extends AbstractController
         $form->handleRequest($request);
 
         $recaptcha = $request->get('g-recaptcha-response');
-        if ($form->isSubmitted() && $form->isValid() && !empty($recaptcha)) {
-            if ($captcha->request($this->getParameter('captcha_secret_key') ,$recaptcha)->success == true) {
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!empty($recaptcha) && $captcha->request($this->getParameter('captcha_secret_key') ,$recaptcha)->success == true) {
                 $message_entity = $form->getData();
                 $message_entity->setCreatedAt(new \DateTime('now'));
                 $message_entity->setUserIp($request->getClientIp());
@@ -71,7 +72,10 @@ class MessageController extends AbstractController
                 $em->persist($message_entity);
                 $em->flush();
 
-                return $this->redirectToRoute('message');
+                return $this->redirectToRoute('message', ['send_message' => true]);
+            }
+            else {
+                $form->get('text')->addError(new FormError('Are you exactly a human? Please, confirm captcha!'));
             }
         }
 
