@@ -30,7 +30,7 @@ Guestbook allows site users to leave messages on the site. All data entered by t
     ```
 4. Installing composer packages `composer install --no-dev --optimize-autoloader` and updating `composer update`
 5. Clearing cache `php bin/console cache:clear --env=prod --no-debug`
-6. Install CKEditor Bundle `php app/console ckeditor:install`
+6. Install CKEditor Bundle `php bin/console ckeditor:install`
 7. Install the Assets `php bin/console assets:install public`
 8. Configure database:
     1. Create base `php bin/console doctrine:database:create`
