@@ -35,7 +35,9 @@ Guestbook allows site users to leave messages on the site. All data entered by t
 8. Configure database:
     1. Create base `php bin/console doctrine:database:create`
     2. Make migrations `php bin/console make:migrations` and migrate `php bin/console doctrine:migrations:migrate`
-9. Go to your web-site
+9. Add permissoins `chmod 777 public/uploads/pictures`
+10. Set RECAPTCHA keys in file `config/services.yaml`
+11. Go to your web-site
 
 #### More documentation
 [Configuring Symfony](https://symfony.com/doc/current/configuration.html)
