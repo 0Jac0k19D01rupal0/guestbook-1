@@ -5,6 +5,7 @@ menu:
   login: 'Войти'
   profile: 'Профиль'
   logout: 'Выйти'
+  admin: 'Админпанель'
 
 auth:
   login: 'Авторизация'
@@ -12,17 +13,22 @@ auth:
   username: 'Имя пользователя'
   email: 'Почта'
   password: 'Пароль'
+  repeat_password: 'Повоторите пароль'
   remember_password: 'Запомнить меня'
   create_account: 'Создать аккаунт'
   signin: 'Войти'
   terms_accepted: 'Я прочитал и согласен с условиями'
   pwd_recovery: 'Забыл пароль?'
   recovery_title: 'Восстановление пароля'
+  new_password_title: 'Сбрасывание пароля'
+  confirm_email_title: 'Подтвердить почту'
   profile: 'Перейти в профиль'
 
 pages:
   messages: 'Гостевая книга'
   profile: 'Мой профиль'
+  new_message: 'Новое сообщение'
+  update_message: 'Редактировать сообщение'
   total_messages: 'Сообщений на странице'
   your_messages: 'Ваши сообщения'
   delete_message: 'Удаление сообщения'
@@ -30,7 +36,14 @@ pages:
   delete_info: 'Востановить его будет невозможно'
   recovery_error: 'Почта не была найдена'
   recovery_success: 'Вам на почту отправлено письмо с инструкцией по восстановлению пароля'
+  new_password_success: 'Пароль успешно изменен'
+  new_password_error: 'Ошибка доступа! Пароль уже изменен'
+  register_success: 'Регистрация завершена! А письмо с подтверждением было отправлено на ваш электронный адрес'
+  confirm_email_success: 'Электронная почта была успешно подтверждена'
+  confirm_email_error: 'Электронная почта уже была подтверждена'
+  send_message: 'Сообщение отправлено на модерацию, оно скоро появится'
   sort_by: 'Сортировать по:'
+  single_message: 'Сообщение'
 
 buttons:
   read: 'Читать'
@@ -40,7 +53,8 @@ buttons:
   new_comment: 'Написать комментарий'
   delete_message_yes: 'Да, удалите!'
   delete_message_no: 'Нет, спасибо'
-  sent_to_mail: 'Восстановить'
+  send_to_mail: 'Восстановить'
+  new_password: 'Изменить пароль'
 
 forms:
   sort_id: 'Дате'

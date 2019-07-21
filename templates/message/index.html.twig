@@ -6,9 +6,6 @@
         <div class="row">
             <div class="col-md">
                 <h1 class="font-weight-light">{{ 'pages.messages'| trans }}</h1>
-                {#{{ form_start(sort_form) }}#}
-                {#{{ form_widget(sort_form.sort) }}#}
-                {#{{ form_end(sort_form) }}#}
                 {{ 'pages.sort_by' | trans }}
                 {{ knp_pagination_sortable(messages, 'forms.sort_id'|trans, 'id') }} |
                 {{ knp_pagination_sortable(messages, 'forms.sort_username'|trans, 'username') }} |

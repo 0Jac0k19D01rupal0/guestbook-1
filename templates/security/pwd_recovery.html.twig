@@ -21,7 +21,7 @@
                                         {{ form_widget(form.email) }}
                                         <label for="inputEmail">{{ form_label(form.email) }}</label>
                                     </div>
-                                    <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"><i class="fas fa-envelope"></i> {{ 'buttons.sent_to_mail'| trans }}</button>
+                                    <button class="btn btn-lg btn-success btn-block text-uppercase" type="submit"><i class="fas fa-envelope"></i> {{ 'buttons.send_to_mail'| trans }}</button>
                                 {{ form_end(form) }}
                             {% else %}
                                 <p class="text-center">{{ result | trans }}</p>

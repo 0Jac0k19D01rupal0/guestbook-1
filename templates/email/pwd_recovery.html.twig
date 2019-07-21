@@ -22,25 +22,24 @@
             background: #f1f1f1;
         }
 
-        /* What it does: Stops email clients resizing small text. */
+
         * {
             -ms-text-size-adjust: 100%;
             -webkit-text-size-adjust: 100%;
         }
 
-        /* What it does: Centers email on Android 4.4 */
+
         div[style*="margin: 16px 0"] {
             margin: 0 !important;
         }
 
-        /* What it does: Stops Outlook from adding extra spacing to tables. */
+
         table,
         td {
             mso-table-lspace: 0pt !important;
             mso-table-rspace: 0pt !important;
         }
 
-        /* What it does: Fixes webkit padding issue. */
         table {
             border-spacing: 0 !important;
             border-collapse: collapse !important;
@@ -48,12 +47,10 @@
             margin: 0 auto !important;
         }
 
-        /* What it does: Uses a better rendering method when resizing images in IE. */
         img {
             -ms-interpolation-mode:bicubic;
         }
 
-        /* What it does: Prevents Windows 10 Mail from underlining links despite inline CSS. Styles for underlined links should be inline. */
         a {
             text-decoration: none;
         }
@@ -62,10 +59,8 @@
             color: lightgreen;
         }
 
-        /* What it does: A work-around for email clients meddling in triggered links. */
         *[x-apple-data-detectors],  /* iOS */
-        .unstyle-auto-detected-links *,
-        .aBn {
+        .unstyle-auto-detected-links * {
             border-bottom: 0 !important;
             cursor: default !important;
             color: inherit !important;
@@ -76,18 +71,6 @@
             line-height: inherit !important;
         }
 
-        /* What it does: Prevents Gmail from displaying a download button on large, non-linked images. */
-        .a6S {
-            display: none !important;
-            opacity: 0.01 !important;
-        }
-
-        /* What it does: Prevents Gmail from changing the text color in conversation threads. */
-        .im {
-            color: inherit !important;
-        }
-
-        /* If the above doesn't work, add a .g-img class to any image in question. */
         img.g-img + div {
             display: none !important;
         }
@@ -113,26 +96,10 @@
 
     </style>
 
-    <!-- CSS Reset : END -->
-
-    <!-- Progressive Enhancements : BEGIN -->
     <style>
-
-        .primary{
-            background: #007bff;
-        }
 
         .bg_white{
             background: #ffffff;
-        }
-        .bg_light{
-            background: #fafafa;
-        }
-        .bg_black{
-            background: #000000;
-        }
-        .bg_dark{
-            background: rgba(0,0,0,.8);
         }
         .email-section{
             padding:2.5em;
@@ -147,8 +114,6 @@
             background: lightgreen;
             color: #ffffff;
         }
-
-
 
         h1,h2,h3,h4,h5,h6{
             font-family: 'Playfair Display', serif;
@@ -179,9 +144,11 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /*HERO*/
         .hero{
             position: relative;
+            background-image: url("https://gb.root7.ru/assets/img/bg.jpg");
+            background-size: cover;
+            height: 400px;
         }
         .hero img{
 
@@ -226,12 +193,8 @@
             margin: 0 auto;
         }
 
-        .heading-section-white{
-            color: rgba(255,255,255,.8);
-        }
         .heading-section-white h2{
             font-size: 28px;
-            font-family:
             line-height: 1;
             padding-bottom: 0;
         }
@@ -297,29 +260,6 @@
             font-size: 13px;
         }
 
-        /*FOOTER*/
-
-        .footer{
-            color: rgba(255,255,255,.5);
-
-        }
-        .footer .heading{
-            color: #ffffff;
-            font-size: 20px;
-        }
-        .footer ul{
-            margin: 0;
-            padding: 0;
-        }
-        .footer ul li{
-            list-style: none;
-            margin-bottom: 10px;
-        }
-        .footer ul li a{
-            color: rgba(255,255,255,1);
-        }
-
-
         @media screen and (max-width: 500px) {
 
             .icon{
@@ -353,7 +293,7 @@
                 </td>
             </tr><!-- end tr -->
             <tr>
-                <td valign="middle" class="hero" style="background-image: url('https://root7.ru/bg.jpg'); background-size: cover; height: 400px;">
+                <td valign="middle" class="hero">
                     <table>
                         <tr>
                             <td>
@@ -383,7 +323,7 @@
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                                 <tr>
                                                     <td class="icon">
-                                                        <img src="https://root7.ru/ico-link.png" alt="" style="width: 60px; max-width: 600px; height: auto; margin: auto; display: block;">
+                                                        <img src="https://gb.root7.ru/assets/img/ico-link.png" alt="" style="width: 60px; max-width: 600px; height: auto; margin: auto; display: block;">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -398,7 +338,7 @@
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                                 <tr>
                                                     <td class="icon">
-                                                        <img src="https://root7.ru/ico-password.png" alt="" style="width: 60px; max-width: 600px; height: auto; margin: auto; display: block;">
+                                                        <img src="https://gb.root7.ru/assets/img/ico-password.png" alt="" style="width: 60px; max-width: 600px; height: auto; margin: auto; display: block;">
                                                     </td>
                                                 </tr>
                                                 <tr>

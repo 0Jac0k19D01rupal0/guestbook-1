@@ -1292,16 +1292,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "2.1.9",
+            "version": "2.1.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "128cc721d771ec2c46ce59698f4ca42b73f71b25"
+                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/128cc721d771ec2c46ce59698f4ca42b73f71b25",
-                "reference": "128cc721d771ec2c46ce59698f4ca42b73f71b25",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
+                "reference": "a6c8d7101b19a451c1707b1b79bbbc56e4bdb7ec",
                 "shasum": ""
             },
             "require": {
@@ -1311,7 +1311,8 @@
             "require-dev": {
                 "dominicsayers/isemail": "dev-master",
                 "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-                "satooshi/php-coveralls": "^1.0.1"
+                "satooshi/php-coveralls": "^1.0.1",
+                "symfony/phpunit-bridge": "^4.4@dev"
             },
             "suggest": {
                 "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
@@ -1345,7 +1346,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-06-23T10:14:27+00:00"
+            "time": "2019-07-19T20:52:08+00:00"
         },
         {
             "name": "fig/link-util",
@@ -1531,20 +1532,22 @@
         },
         {
             "name": "knplabs/knp-components",
-            "version": "v2.0.1",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/knp-components.git",
-                "reference": "74a1c90cda673d4704eff77055f62af57a208a6c"
+                "reference": "e4edbbe12c930ed2c0cf7d624b438315471f5e83"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/74a1c90cda673d4704eff77055f62af57a208a6c",
-                "reference": "74a1c90cda673d4704eff77055f62af57a208a6c",
+                "url": "https://api.github.com/repos/KnpLabs/knp-components/zipball/e4edbbe12c930ed2c0cf7d624b438315471f5e83",
+                "reference": "e4edbbe12c930ed2c0cf7d624b438315471f5e83",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.2",
+                "symfony/event-dispatcher": "^3.4 || ^4.0",
+                "symfony/http-foundation": "^3.4 || ^4.0"
             },
             "require-dev": {
                 "doctrine/mongodb-odm": "^2.0.0-RC1",
@@ -1553,8 +1556,6 @@
                 "jackalope/jackalope-doctrine-dbal": "~1.2",
                 "phpunit/phpunit": "^7.0 || ^8.0",
                 "ruflin/elastica": "~1.0",
-                "symfony/event-dispatcher": "^3.4 || ^4.0",
-                "symfony/http-foundation": "^3.4 || ^4.0",
                 "symfony/http-kernel": "^3.4 || ^4.0",
                 "symfony/property-access": "^3.4 || ^4.0"
             },
@@ -1571,12 +1572,12 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.1.0-dev"
+                    "dev-master": "2.2.0-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Knp\\Component": "src"
+                "psr-4": {
+                    "Knp\\Component\\": "src/Knp/Component"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1602,7 +1603,7 @@
                 "pager",
                 "paginator"
             ],
-            "time": "2019-06-26T13:56:02+00:00"
+            "time": "2019-07-15T12:05:35+00:00"
         },
         {
             "name": "knplabs/knp-paginator-bundle",
@@ -1867,16 +1868,16 @@
         },
         {
             "name": "pagerfanta/pagerfanta",
-            "version": "v2.1.2",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/Pagerfanta.git",
-                "reference": "45a85ad426316ae37f2d007022e5b4c95bc3aef4"
+                "reference": "a53ff01d521648d9dbca19b93ac6bc75a59b0972"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/45a85ad426316ae37f2d007022e5b4c95bc3aef4",
-                "reference": "45a85ad426316ae37f2d007022e5b4c95bc3aef4",
+                "url": "https://api.github.com/repos/whiteoctober/Pagerfanta/zipball/a53ff01d521648d9dbca19b93ac6bc75a59b0972",
+                "reference": "a53ff01d521648d9dbca19b93ac6bc75a59b0972",
                 "shasum": ""
             },
             "require": {
@@ -1932,7 +1933,7 @@
                 "paginator",
                 "paging"
             ],
-            "time": "2019-04-02T08:50:39+00:00"
+            "time": "2019-07-17T20:56:16+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3299,16 +3300,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.4.4",
+            "version": "v1.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "4b5d25a5538e2dc37ff84645fe7498a9a04947b3"
+                "reference": "4467ab35c82edebac58fe58c22cea166a805eb1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/4b5d25a5538e2dc37ff84645fe7498a9a04947b3",
-                "reference": "4b5d25a5538e2dc37ff84645fe7498a9a04947b3",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/4467ab35c82edebac58fe58c22cea166a805eb1f",
+                "reference": "4467ab35c82edebac58fe58c22cea166a805eb1f",
                 "shasum": ""
             },
             "require": {
@@ -3344,7 +3345,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2019-07-12T06:29:25+00:00"
+            "time": "2019-07-19T08:59:18+00:00"
         },
         {
             "name": "symfony/form",

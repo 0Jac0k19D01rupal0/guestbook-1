@@ -5,6 +5,7 @@ menu:
   login: 'Увійти'
   profile: 'Профіль'
   logout: 'Вийти'
+  admin: 'Адмінпанель'
 
 auth:
   login: 'Авторизація'
@@ -12,17 +13,22 @@ auth:
   username: 'Ім я'
   email: 'Пошта'
   password: 'Пароль'
+  repeat_password: 'Повоторіть пароль'
   remember_password: 'Запам ятати мене'
   create_account: 'Створити профіль'
   signin: 'Увійти'
   terms_accepted: 'Я прочитав та згоджуюсь з умовами'
   pwd_recovery: 'Забув пароль?'
   recovery_title: 'Відновлення пароля'
+  new_password_title: 'Скидування пароля'
+  confirm_email_title: 'Підтвердити пошту'
   profile: 'Перейти в профіль'
 
 pages:
   messages: 'Гостьова книга'
   profile: 'Мій профіль'
+  new_message: 'Нове повідомлення'
+  update_message: 'Редагувати повідомлення'
   total_messages: 'Повідомлень на сторінці'
   your_messages: 'Ваші повідомлення'
   delete_message: 'Видалення повідомлення'
@@ -30,7 +36,14 @@ pages:
   delete_info: 'Відновити його буде неможливо'
   recovery_error: 'Почта не була знайдена'
   recovery_success: 'Вам на пошту було відправлено лист з інструкцією для відновлення пароля'
+  new_password_success: 'Пароль успешно изменен'
+  new_password_error: 'Помилка доступу! Пароль вже змінено'
+  register_success: 'Реєстрація завершена! А лист з підтвердженням було відправлено на вашу електронну адресу'
+  confirm_email_success: 'Електронна пошта була успішно підтверджена'
+  confirm_email_error: 'Електронна пошта вже була підтверджена'
+  send_message: 'Повідомлення надіслано на модерацію, воно скоро з'явиться'
   sort_by: 'Сортувати по:'
+  single_message: 'Повідомлення'
 
 buttons:
   read: 'Читати'

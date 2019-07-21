@@ -68,7 +68,7 @@ class User implements UserInterface
     private $updated_at;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Verification", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Verification", mappedBy="user", orphanRemoval=true)
      */
     private $verifications;
 
