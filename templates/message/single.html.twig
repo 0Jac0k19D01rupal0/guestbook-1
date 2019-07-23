@@ -1,6 +1,6 @@
 {% extends 'basepage.html.twig' %}
 
-{% block title %}{{ 'pages.single_message' | trans }}{% endblock %}
+{% block title %}{{ 'pages.single_message' | trans }} | {{ message.username }}{% endblock %}
 
 {% block content %}
     <div class="container">

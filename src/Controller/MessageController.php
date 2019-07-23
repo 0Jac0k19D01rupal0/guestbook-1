@@ -46,7 +46,7 @@ class MessageController extends AbstractController
 
         $recaptcha = $request->get('g-recaptcha-response');
         if ($form->isSubmitted() && $form->isValid()) {
-            if (!empty($recaptcha) && $captcha->request($this->getParameter('captcha_secret_key') ,$recaptcha)->success == true) {
+            if (!empty($recaptcha) && $captcha->request($this->getParameter('captcha_secret_key'), $recaptcha)->success == true) {
                 $message_entity = $form->getData();
                 $message_entity->setCreatedAt(new \DateTime('now'));
                 $message_entity->setUserIp($request->getClientIp());
@@ -111,12 +111,14 @@ class MessageController extends AbstractController
                 $message_entity->setUserIp($request->getClientIp());
 
                 $file = $form->get('picture')->getData();
-                $filename = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move(
-                    $this->getParameter('picture_dir'), $filename
-                );
+                if (isset($file) || !is_null($file)) {
+                    $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                    $file->move(
+                        $this->getParameter('picture_dir'), $filename
+                    );
 
-                $message_entity->setPicture($filename);
+                    $message_entity->setPicture($filename);
+                }
 
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($message_entity);
@@ -134,7 +136,7 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/message/update/{message}", name="update_message")
-     * IsGranted("ROLE_USER")
+     * IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function update(Request $request, Message $message, Captcha $captcha)
     {
@@ -168,12 +170,14 @@ class MessageController extends AbstractController
                     $message->setUpdatedAt(new \DateTime('now'));
 
                     $file = $form->get('picture')->getData();
-                    $filename = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move(
-                        $this->getParameter('picture_dir'), $filename
-                    );
+                    if (isset($file) || !is_null($file)) {
+                        $filename = md5(uniqid()) . '.' . $file->guessExtension();
+                        $file->move(
+                            $this->getParameter('picture_dir'), $filename
+                        );
 
-                    $message->setPicture($filename);
+                        $message->setPicture($filename);
+                    }
 
                     $em = $this->getDoctrine()->getManager();
                     $em->flush();
@@ -198,10 +202,7 @@ class MessageController extends AbstractController
      */
     public function message(Message $message)
     {
-        $title = substr($message->getText(), 0, 20);
-
         return $this->render('message/single.html.twig', [
-            'title' => $title,
             'message' => $message,
             'picture_dir' => $this->getParameter('picture_path'),
             'img_support' => true,
@@ -210,7 +211,7 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/message/delete/{message}", name="delete_message")
-     * IsGranted("ROLE_USER")
+     * IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function delete(Message $message)
     {

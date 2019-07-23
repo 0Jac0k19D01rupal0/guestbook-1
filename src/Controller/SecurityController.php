@@ -52,13 +52,10 @@ class SecurityController extends AbstractController
             if (is_null($find_email) && is_null($find_username)) {
                 $password = $passwordEncoder->encodePassword($user, $user->getPassword());
                 $user->setPassword($password);
-
                 $user = $form->getData();
                 $user->setCreatedAt(new \DateTime('now'));
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
-                $em->flush();
 
                 $verification = new Verification();
                 $verification->setUser($user);
@@ -68,13 +65,11 @@ class SecurityController extends AbstractController
                 $verification->setStatus(false);
                 $verification->setCreatedAt(new \DateTime('now'));
 
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($verification);
                 $em->flush();
 
                 /* SEND MAIL */
                 $link = $_SERVER['SERVER_NAME'].'/confirm_email/?token='.$verification->getToken();
-
                 $message = (new \Swift_Message('[GuestBook] Confirm Email'))
                     ->setFrom('myktm-dev@gmail.com')
                     ->setTo($user->getEmail())
